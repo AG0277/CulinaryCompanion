@@ -2,20 +2,28 @@ import React, { ChangeEvent, SyntheticEvent } from "react";
 
 interface Props {
   search: string | undefined;
-  onClick: (e: SyntheticEvent) => void;
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onSearchSubmit: (e: SyntheticEvent) => void;
+  handleSearchChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const SearchBar: React.FC<Props> = ({
+  onSearchSubmit,
   search,
-  onClick,
-  handleChange,
+  handleSearchChange,
 }: Props): JSX.Element => {
   return (
-    <div>
-      <input value={search} onChange={(e) => handleChange(e)} type="text" />
-      <button onClick={(e) => onClick(e)}>Submit</button>
-    </div>
+    <form
+      onSubmit={onSearchSubmit}
+      className="flex justify-center my-20 text-2xl"
+    >
+      <input
+        className="w-1/5 border-8 border-emerald-400 p-2 pl-6 rounded-2xl focus:outline-none"
+        placeholder="Find a recipe or ingredient"
+        value={search}
+        onChange={(e) => handleSearchChange(e)}
+        type="text"
+      />
+    </form>
   );
 };
 
