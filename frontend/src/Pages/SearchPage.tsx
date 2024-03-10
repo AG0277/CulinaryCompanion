@@ -6,7 +6,7 @@ import CardList from "../Components/CardList";
 
 type Props = {};
 
-const HomePage = (props: Props) => {
+const SearchPage = (props: Props) => {
   const [search, setSearch] = useState<string>("");
   const [searchResults, setSearchResult] =
     useState<SearchRecipesByNeutralLanguage>();
@@ -41,4 +41,4 @@ const HomePage = (props: Props) => {
   );
 };
 
-export default HomePage;
+export default SearchPage;
