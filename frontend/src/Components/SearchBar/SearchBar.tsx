@@ -1,4 +1,4 @@
-import React, { ChangeEvent, SyntheticEvent, useState } from "react";
+import React, { ChangeEvent, SyntheticEvent, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { Form, Link } from "react-router-dom";
 
@@ -9,7 +9,6 @@ const SearchBar: React.FC<Props> = ({}: Props): JSX.Element => {
   const navigate = useNavigate();
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
-    console.log(e);
   };
   const onSearchSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
@@ -18,30 +17,32 @@ const SearchBar: React.FC<Props> = ({}: Props): JSX.Element => {
   return (
     <form
       onSubmit={onSearchSubmit}
-      className="flex flex-row items-center border-orange-400 rounded-2xl focus:outline-none border-8 bg-white"
+      className="flex flex-row items-center border-orange-400 rounded-2xl focus:outline-none border-8 bg-white w-[600px] h-[55px]"
     >
       <input
-        className="p-2 pl-6 w-[600px] bg-transparent"
+        className="p-2 pl-6  w-11/12 bg-transparent outline-none"
         placeholder="Find a recipe or ingredient"
         value={search}
         onChange={(e) => handleSearchChange(e)}
         type="text"
       />
-      <Link to={`/search/:${search}`}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          className="w-6 h-6 mr-5"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-          />
-        </svg>
+      <Link to={`/search/:${search}`} className="w-1/12 h-full ">
+        <div className="h-full w-full bg-orange-400 items-center justify-center flex hover:rounded-r-lg hover:bg-orange-500">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            className="w-8/12 h-8/12 "
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+            />
+          </svg>
+        </div>
       </Link>
     </form>
   );

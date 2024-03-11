@@ -7,8 +7,8 @@ interface Props {
 }
 
 const RecipeIngredientList = ({ searchFullRecipeById }: Props) => {
-  const htmlString = searchFullRecipeById.instructions;
-  const htmlString1 = searchFullRecipeById.summary;
+  const htmlStringInstructions = searchFullRecipeById.instructions;
+  const htmlStringSummary = searchFullRecipeById.summary;
   return (
     <div className="flex flex-col">
       <div className="max-w-[556px] mx-auto ">
@@ -65,9 +65,9 @@ const RecipeIngredientList = ({ searchFullRecipeById }: Props) => {
           )}
         </ul>
         <h1>Instructions</h1>
-        <div dangerouslySetInnerHTML={{ __html: htmlString }} />
+        <div dangerouslySetInnerHTML={{ __html: htmlStringInstructions }} />
         <h1>Summary</h1>
-        <div dangerouslySetInnerHTML={{ __html: htmlString1 }} />
+        <div dangerouslySetInnerHTML={{ __html: htmlStringSummary }} />
       </div>
     </div>
   );

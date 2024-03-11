@@ -75,3 +75,10 @@ export interface ExtendedIngredient {
   originalName: string;
   unit: string;
 }
+
+export interface getNutrientByRecipeId {
+  name: string;
+  amount: number;
+  unit: string;
+  percentOfDailyNeeds: number;
+}
