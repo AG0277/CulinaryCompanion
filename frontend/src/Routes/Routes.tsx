@@ -1,7 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-import SearchPage from "../Pages/SearchPage";
 import RecipePage from "../Pages/RecipePage";
 import App from "../App";
+
+import SearchPage from "../Pages/SearchPage";
 
 export const router = createBrowserRouter([
   {
@@ -9,7 +10,7 @@ export const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "",
+        path: "search/:naturalLanguage",
         element: <SearchPage />,
       },
       {

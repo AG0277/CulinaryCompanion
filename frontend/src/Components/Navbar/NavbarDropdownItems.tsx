@@ -1,4 +1,4 @@
-export const NavbarDropdownItems = [
+export const config = [
   {
     title: "recipes",
     subMenu: [
@@ -7,19 +7,19 @@ export const NavbarDropdownItems = [
         subMenu: [
           {
             title: "italian",
-            subMenu: null,
+            subMenu: [],
           },
           {
             title: "asian",
-            subMenu: null,
+            subMenu: [],
           },
           {
             title: "thai",
-            subMenu: null,
+            subMenu: [],
           },
           {
             title: "greek",
-            subMenu: null,
+            subMenu: [],
           },
         ],
       },
@@ -28,15 +28,15 @@ export const NavbarDropdownItems = [
         subMenu: [
           {
             title: "pork",
-            subMenu: null,
+            subMenu: [],
           },
           {
             title: "lamb",
-            subMenu: null,
+            subMenu: [],
           },
           {
             title: "beef",
-            subMenu: null,
+            subMenu: [],
           },
         ],
       },

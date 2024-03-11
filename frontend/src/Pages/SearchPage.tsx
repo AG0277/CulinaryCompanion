@@ -1,37 +1,31 @@
 import React, { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
 import { SearchRecipesByNeutralLanguage } from "../recipe";
 import { SearchRecipe } from "../api";
-import SearchBar from "../Components/SearchBar";
+import SearchBar from "../Components/SearchBar/SearchBar";
 import CardList from "../Components/CardList";
+import { useParams } from "react-router-dom";
 
 type Props = {};
 
 const SearchPage = (props: Props) => {
-  const [search, setSearch] = useState<string>("");
+  const params = useParams<{ naturalLanguage: string }>();
   const [searchResults, setSearchResult] =
     useState<SearchRecipesByNeutralLanguage>();
   const [serverError, setServerError] = useState<string>("");
-  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-    console.log(e);
-  };
-  const onSearchSubmit = async (e: SyntheticEvent) => {
-    e.preventDefault();
-    const result = await SearchRecipe(search);
-    if (typeof result === "string") {
-      setServerError(result);
-    } else if (Array.isArray(result.results)) {
-      setSearchResult(result);
-    }
-    console.log(searchResults);
-  };
+  useEffect(() => {
+    const getRecipes = async () => {
+      const result = await SearchRecipe(params.naturalLanguage!);
+      if (typeof result === "string") {
+        setServerError(result);
+      } else if (Array.isArray(result.results)) {
+        setSearchResult(result);
+      }
+    };
+
+    getRecipes();
+  }, []);
   return (
     <div>
-      <SearchBar
-        onSearchSubmit={onSearchSubmit}
-        search={search}
-        handleSearchChange={handleSearchChange}
-      />
       {serverError ? (
         <h1>{serverError}</h1>
       ) : (

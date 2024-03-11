@@ -1,62 +1,19 @@
 import React, { useState } from "react";
-import { NavbarDropdownItems } from "../../Helpers/NavbarDropdownItems";
+import { config } from "./NavbarDropdownItems";
 import DropdownMenu from "./Dropdown";
+import SearchBarResult from "../SearchBar/SearchBarResult";
+import SearchBar from "../SearchBar/SearchBar";
 
 type Props = {};
 
 const Navbar = ({}: Props) => {
   return (
-    <div className="h-28 bg-emerald-400 flex flex-row">
-      <h2>Culinary Companion</h2>
-      <div>
-        <DropdownMenu
-          config={[
-            {
-              title: "recipes",
-              subMenu: [
-                {
-                  title: "cuisine",
-                  subMenu: [
-                    {
-                      title: "italian",
-                      subMenu: [],
-                    },
-                    {
-                      title: "asian",
-                      subMenu: [],
-                    },
-                    {
-                      title: "thai",
-                      subMenu: [],
-                    },
-                    {
-                      title: "greek",
-                      subMenu: [],
-                    },
-                  ],
-                },
-                {
-                  title: "Meat recipes",
-                  subMenu: [
-                    {
-                      title: "pork",
-                      subMenu: [],
-                    },
-                    {
-                      title: "lamb",
-                      subMenu: [],
-                    },
-                    {
-                      title: "beef",
-                      subMenu: [],
-                    },
-                  ],
-                },
-              ],
-            },
-          ]}
-        />
+    <div className="h-28 bg-emerald-400 flex flex-row items-center justify-center sticky top-0  w-full">
+      <h2 className="mr-10">Culinary Companion</h2>
+      <div className="mr-10">
+        <DropdownMenu config={config} />
       </div>
+      <SearchBar />
     </div>
   );
 };

@@ -4,14 +4,6 @@ import RecipeIngredient from "./RecipeIngredient";
 
 interface Props {
   searchFullRecipeById: SearchFullRecipeById;
-  //   extendedIngredient: ExtendedIngredient;
-  //   title: string;
-  //   image: string;
-  //   servings: number;
-  //   readyInMinutes: number;
-  //   sourceURL: string;
-  //   instructions: string[];
-  //   summary: string;
 }
 
 const RecipeIngredientList = ({ searchFullRecipeById }: Props) => {

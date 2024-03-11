@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Dropdown.css";
+
 interface MenuItem {
   title: string;
-  subMenu: any;
+  subMenu: MenuItem[];
 }
 
 interface Props {
@@ -10,42 +11,25 @@ interface Props {
   subMenu?: boolean;
 }
 
-class DropdownMenu extends React.Component<Props> {
-  getMenuItemTitle = (
-    menuItem: MenuItem,
-    index: number,
-    depthLevel: number
-  ) => {
-    return menuItem.title;
-  };
-
-  getMenuItem = (menuItem: MenuItem, depthLevel: number, index: number) => {
-    let title = this.getMenuItemTitle(menuItem, index, depthLevel);
-
-    if (menuItem.subMenu && menuItem.subMenu.length > 0) {
+const DropdownMenu: React.FC<Props> = ({ config, subMenu }: Props) => {
+  const options = config.map((item, index) => {
+    if (item.subMenu.length > 0) {
       return (
-        <li key={index}>
-          {title}
-          <DropdownMenu config={menuItem.subMenu} subMenu={true} />
+        <li key={index} className="bg-emerald-400 has-submenu">
+          {item.title}
+          <DropdownMenu config={item.subMenu} />
         </li>
       );
     } else {
-      return <li key={index}>{title}</li>;
+      return (
+        <li key={index} className="bg-emerald-400">
+          {item.title}
+        </li>
+      );
     }
-  };
+  });
 
-  render() {
-    let { config, subMenu } = this.props;
+  return <ul className={subMenu ? "" : "dropdown-menu"}>{options}</ul>;
+};
 
-    let options = config.map((item, index) => {
-      return this.getMenuItem(item, 0, index);
-    });
-
-    if (subMenu && subMenu === true) {
-      return <ul>{options}</ul>;
-    }
-
-    return <ul className="dropdown-menu">{options}</ul>;
-  }
-}
 export default DropdownMenu;
