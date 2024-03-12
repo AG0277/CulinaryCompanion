@@ -12,6 +12,9 @@ export interface RecipeInfo {
   imageType: string;
 }
 
+export interface RandomRecipe {
+  recipes: SearchFullRecipeById[];
+}
 export interface SearchFullRecipeById {
   id: number;
   title: string;
@@ -49,6 +52,8 @@ export interface SearchFullRecipeById {
   extendedIngredients: ExtendedIngredient[];
   summary: string;
   winePairing: WinePairing;
+  nutrition: [];
+  Nutrients: Nutrients;
 }
 
 export interface ExtendedIngredient {
@@ -76,9 +81,9 @@ export interface ExtendedIngredient {
   unit: string;
 }
 
-export interface getNutrientByRecipeId {
-  name: string;
-  amount: number;
-  unit: string;
-  percentOfDailyNeeds: number;
+export interface Nutrients {
+  kcal: string;
+  protein: string;
+  fat: string;
+  carbohydrates: string;
 }

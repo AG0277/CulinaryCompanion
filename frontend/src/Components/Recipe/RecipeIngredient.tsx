@@ -23,9 +23,9 @@ const RecipeIngredient: React.FC<Props> = ({
   return (
     <div>
       <p>
-        {name}&nbsp;
         {measures.metric.amount}&nbsp;
-        {measures.metric.unitShort}
+        {measures.metric.unitLong}&nbsp;
+        {name}
       </p>
     </div>
   );

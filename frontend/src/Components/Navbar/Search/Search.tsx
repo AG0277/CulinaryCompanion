@@ -1,9 +1,8 @@
-import React, { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
-import { SearchRecipesByNeutralLanguage } from "../recipe";
-import { SearchRecipe } from "../api";
-import SearchBar from "../Components/SearchBar/SearchBar";
-import CardList from "../Components/CardList";
+import React, { useEffect, useState } from "react";
+import { SearchRecipesByNeutralLanguage } from "../../../SpoonacularAPI/recipe";
+import { SearchRecipe } from "../../../SpoonacularAPI/api";
 import { useParams } from "react-router-dom";
+import Card from "../../Card/Card";
 
 type Props = {};
 
@@ -25,11 +24,20 @@ const SearchPage = (props: Props) => {
     getRecipes();
   }, []);
   return (
-    <div>
+    <div className="flex flex-row flex-wrap justify-center align-middle">
       {serverError ? (
         <h1>{serverError}</h1>
+      ) : searchResults && searchResults.results.length > 0 ? (
+        searchResults.results.map((searchResult) => (
+          <Card
+            key={searchResult.id}
+            image={searchResult.image}
+            recipeName={searchResult.title}
+            id={searchResult.id}
+          />
+        ))
       ) : (
-        searchResults && <CardList searchResult={searchResults} />
+        <h1>No Results</h1>
       )}
     </div>
   );

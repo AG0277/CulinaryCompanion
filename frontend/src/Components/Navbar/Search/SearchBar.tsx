@@ -17,7 +17,7 @@ const SearchBar: React.FC<Props> = ({}: Props): JSX.Element => {
   return (
     <form
       onSubmit={onSearchSubmit}
-      className="flex flex-row items-center border-orange-400 rounded-2xl focus:outline-none border-8 bg-white w-[600px] h-[55px]"
+      className="flex flex-row items-center border-orangeIsh rounded-2xl focus:outline-none border-8 bg-white w-[600px] h-[55px]"
     >
       <input
         className="p-2 pl-6  w-11/12 bg-transparent outline-none"
@@ -27,7 +27,7 @@ const SearchBar: React.FC<Props> = ({}: Props): JSX.Element => {
         type="text"
       />
       <Link to={`/search/:${search}`} className="w-1/12 h-full ">
-        <div className="h-full w-full bg-orange-400 items-center justify-center flex hover:rounded-r-lg hover:bg-orange-500">
+        <div className="h-full w-full bg-orangeIsh items-center justify-center flex hover:rounded-r-lg hover:bg-orange-300">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

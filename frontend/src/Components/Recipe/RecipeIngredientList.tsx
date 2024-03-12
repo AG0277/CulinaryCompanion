@@ -1,5 +1,5 @@
 import React from "react";
-import { SearchFullRecipeById } from "../recipe";
+import { SearchFullRecipeById } from "../../SpoonacularAPI/recipe";
 import RecipeIngredient from "./RecipeIngredient";
 
 interface Props {
@@ -29,6 +29,10 @@ const RecipeIngredientList = ({ searchFullRecipeById }: Props) => {
               />
             </svg>
             <p>Servings: {searchFullRecipeById.servings}</p>
+            <p>Kcal: {searchFullRecipeById.Nutrients.kcal}</p>
+            <p>Carbs: {searchFullRecipeById.Nutrients.carbohydrates}</p>
+            <p>Protein: {searchFullRecipeById.Nutrients.protein}</p>
+            <p>Fat: {searchFullRecipeById.Nutrients.fat}</p>
           </div>
           <div className="row inline-flex items-center">
             <svg

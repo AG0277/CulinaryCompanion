@@ -14,10 +14,9 @@
   width: 200px;
   line-height: 35px;
   text-decoration: none;
-  border-radius: 8px;
 }
 
-.dropdown-menu li li a {
+.dropdown-menu li li Link {
   font-size: 12px;
 }
 
@@ -25,23 +24,20 @@
   background: white;
 }
 
-/*--- Sublist Styles ---*/
 .dropdown-menu ul {
   position: absolute;
   display: none;
 }
 
-/*--- Hide Sub Sublists ---*/
 .dropdown-menu li:hover ul ul {
   display: none;
 }
 
-/*--- Sublevel UL's display and position on hover ---*/
 .dropdown-menu li:hover ul {
   display: block;
 }
 .dropdown-menu li li:hover ul {
-  margin-left: 200px; /*This must be width of menu box*/
+  margin-left: 200px;
   margin-top: -35px;
   display: block;
 }
