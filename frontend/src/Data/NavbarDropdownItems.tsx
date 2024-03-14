@@ -1,45 +1,131 @@
 export const config = [
   {
-    title: "recipes",
+    title: "Cuisine",
     subMenu: [
       {
-        title: "cuisine",
+        title: "Asian",
         subMenu: [
           {
-            title: "italian",
+            title: "Chinese",
             subMenu: [],
           },
           {
-            title: "asian",
+            title: "Indian",
             subMenu: [],
           },
           {
-            title: "thai",
+            title: "Japanese",
             subMenu: [],
           },
           {
-            title: "greek",
+            title: "Korean",
+            subMenu: [],
+          },
+          {
+            title: "Thai",
+            subMenu: [],
+          },
+          {
+            title: "Vietnamese",
             subMenu: [],
           },
         ],
       },
       {
-        title: "Meat recipes",
+        title: "American",
         subMenu: [
           {
-            title: "pork",
+            title: "Cajun",
             subMenu: [],
           },
           {
-            title: "lamb",
+            title: "Caribbean",
             subMenu: [],
           },
           {
-            title: "beef",
+            title: "Latin American",
+            subMenu: [],
+          },
+          {
+            title: "Southern",
             subMenu: [],
           },
         ],
       },
+      {
+        title: "British",
+        subMenu: [],
+      },
+      {
+        title: "Eastern European",
+        subMenu: [],
+      },
+      {
+        title: "European",
+        subMenu: [
+          {
+            title: "French",
+            subMenu: [],
+          },
+          {
+            title: "Italian",
+            subMenu: [],
+          },
+          {
+            title: "Spanish",
+            subMenu: [],
+          },
+        ],
+      },
+      {
+        title: "Middle Eastern",
+        subMenu: [],
+      },
     ],
+  },
+  {
+    title: "Meat recipes",
+    subMenu: [
+      {
+        title: "pork",
+        subMenu: [],
+      },
+      {
+        title: "lamb",
+        subMenu: [],
+      },
+      {
+        title: "beef",
+        subMenu: [],
+      },
+      {
+        title: "chicken",
+        subMenu: [],
+      },
+      {
+        title: "turkey",
+        subMenu: [],
+      },
+      {
+        title: "duck",
+        subMenu: [],
+      },
+      {
+        title: "buffalo",
+        subMenu: [],
+      },
+    ],
+  },
+  {
+    title: "Seafood",
+    subMenu: [],
+  },
+  {
+    title: "Vegan",
+    subMenu: [],
+  },
+  {
+    title: "Vegetarian",
+    subMenu: [],
   },
 ];

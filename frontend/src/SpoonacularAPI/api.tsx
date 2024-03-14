@@ -8,9 +8,15 @@ import {
   RandomRecipe,
 } from "./recipe";
 
-export const SearchRecipe = async (query: string) => {
+export const SearchRecipe = async (
+  query: string = "",
+  number: number = 21,
+  offset: number = 0
+) => {
   try {
-    const send = `https://api.spoonacular.com/recipes/complexSearch?query=${query}&number=200&apiKey=${process.env.REACT_APP_API_KEY}`;
+    const send = `https://api.spoonacular.com/recipes/complexSearch?query=${query.toLowerCase()}&offset=${offset.toString()}&instructionsRequired=true&number=${number.toString()}&apiKey=${
+      process.env.REACT_APP_API_KEY
+    }`;
     const data = await axios.get<SearchRecipesByNeutralLanguage>(send);
     return data.data;
   } catch (error: any) {
@@ -62,9 +68,9 @@ export const getRecipeNutrition = async (query: string) => {
   }
 };
 
-export const GetRandomRecipe = async () => {
+export const GetRandomRecipe = async (number: string = "20") => {
   try {
-    const send = `https://api.spoonacular.com/recipes/random?number=10&apiKey=${process.env.REACT_APP_API_KEY}`;
+    const send = `https://api.spoonacular.com/recipes/random?number=${number}&apiKey=${process.env.REACT_APP_API_KEY}`;
     const data = await axios.get<RandomRecipe>(send);
     return data.data;
   } catch (error: any) {

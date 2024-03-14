@@ -23,7 +23,7 @@
     @apply font-semibold;
   }
   h5 {
-    @apply text-lg; /* Use text-lg instead of text-md */
+    @apply text-lg;
     @apply font-semibold;
   }
   h6 {

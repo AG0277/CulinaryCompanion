@@ -7,6 +7,9 @@
   text-align: center;
 }
 
+.dropdown-menu ul {
+  border-radius: 10px;
+}
 .dropdown-menu li {
   display: inline-block;
   position: relative;
@@ -40,9 +43,4 @@
   margin-left: 200px;
   margin-top: -35px;
   display: block;
-}
-
-.dropdown-menu li.has-submenu::after {
-  content: " v";
-  font-size: 14px;
 }

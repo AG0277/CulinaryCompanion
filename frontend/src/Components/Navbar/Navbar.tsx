@@ -1,23 +1,31 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { config } from "../../Data/NavbarDropdownItems";
 import DropdownMenu from "./Dropdown/Dropdown";
 import SearchBar from "./Search/SearchBar";
 import { Link } from "react-router-dom";
 
-type Props = {};
+type Props = {
+  //h-14 bg-greenIsh flex flex-row items-center justify-center
+};
 
-const Navbar = ({}: Props) => {
+const Navbar = memo(({}: Props) => {
   return (
-    <div className="h-28 bg-greenIsh flex flex-row items-center justify-center sticky top-0  w-full z-50">
-      <div className="flex flex-col">
-        <Link to={"/"} className="mr-10">
-          <h1 className="mx-auto">Culinary Companion</h1>
-        </Link>
+    <div className=" bg-greenIsh w-full z-50 sticky top-0 pb-5">
+      <div className=" w-[1200px] mx-auto">
+        <div className="h-28 flex flex-row items-center justify-between">
+          <Link to={"/"} className=" w-1/3  ">
+            <h1 className="">Culinary Companion</h1>
+          </Link>
+          <div className="m-56 w-2/3">
+            <SearchBar />
+          </div>
+        </div>
+      </div>
+      <div className="h-14 flex flex-row items-center justify-center">
         <DropdownMenu parent="" config={config} />
       </div>
-      <SearchBar />
     </div>
   );
-};
+});
 
 export default Navbar;

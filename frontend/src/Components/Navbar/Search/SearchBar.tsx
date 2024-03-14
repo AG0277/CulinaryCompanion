@@ -1,18 +1,22 @@
 import React, { ChangeEvent, SyntheticEvent, useRef, useState } from "react";
 import { useNavigate } from "react-router";
-import { Form, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface Props {}
 
 const SearchBar: React.FC<Props> = ({}: Props): JSX.Element => {
-  const [search, setSearch] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-  };
+
   const onSearchSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    navigate(`/search/${search}`);
+    const value = inputRef.current?.value;
+    if (value === "") return;
+    else {
+      inputRef.current!.value = "";
+      navigate(`/search/${value}`);
+      window.location.reload();
+    }
   };
   return (
     <form
@@ -20,13 +24,16 @@ const SearchBar: React.FC<Props> = ({}: Props): JSX.Element => {
       className="flex flex-row items-center border-orangeIsh rounded-2xl focus:outline-none border-8 bg-white w-[600px] h-[55px]"
     >
       <input
+        ref={inputRef}
         className="p-2 pl-6  w-11/12 bg-transparent outline-none"
         placeholder="Find a recipe or ingredient"
-        value={search}
-        onChange={(e) => handleSearchChange(e)}
         type="text"
       />
-      <Link to={`/search/:${search}`} className="w-1/12 h-full ">
+      <Link
+        to={`/search/${inputRef.current?.value ? inputRef.current.value : ""}`}
+        className="w-1/12 h-full "
+        onSubmit={onSearchSubmit}
+      >
         <div className="h-full w-full bg-orangeIsh items-center justify-center flex hover:rounded-r-lg hover:bg-orange-300">
           <svg
             xmlns="http://www.w3.org/2000/svg"
