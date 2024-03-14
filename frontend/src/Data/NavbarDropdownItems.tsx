@@ -1,131 +1,162 @@
 export const config = [
   {
     title: "Cuisine",
+    additionalQuery: "",
     subMenu: [
       {
         title: "Asian",
+        additionalQuery: "",
         subMenu: [
           {
             title: "Chinese",
+            additionalQuery: "cuisine=chinese",
             subMenu: [],
           },
           {
             title: "Indian",
+            additionalQuery: "cuisine=indian",
             subMenu: [],
           },
           {
             title: "Japanese",
+            additionalQuery: "cuisine=japanese",
             subMenu: [],
           },
           {
             title: "Korean",
+            additionalQuery: "cuisine=korean",
             subMenu: [],
           },
           {
             title: "Thai",
+            additionalQuery: "cuisine=thai",
             subMenu: [],
           },
           {
             title: "Vietnamese",
+            additionalQuery: "cuisine=vietnamese",
             subMenu: [],
           },
         ],
       },
       {
         title: "American",
+        additionalQuery: "",
         subMenu: [
           {
             title: "Cajun",
+            additionalQuery: "cuisine=cajun",
             subMenu: [],
           },
           {
             title: "Caribbean",
+            additionalQuery: "cuisine=caribbean",
             subMenu: [],
           },
           {
             title: "Latin American",
+            additionalQuery: "cuisine=latin-american",
             subMenu: [],
           },
           {
             title: "Southern",
+            additionalQuery: "cuisine=southern",
             subMenu: [],
           },
         ],
       },
       {
         title: "British",
+        additionalQuery: "cuisine=british",
         subMenu: [],
       },
       {
         title: "Eastern European",
+        additionalQuery: "cuisine=eastern-european",
         subMenu: [],
       },
       {
         title: "European",
+        additionalQuery: "",
         subMenu: [
           {
             title: "French",
+            additionalQuery: "cuisine=french",
             subMenu: [],
           },
           {
             title: "Italian",
+            additionalQuery: "cuisine=italian",
             subMenu: [],
           },
           {
             title: "Spanish",
+            additionalQuery: "cuisine=spanish",
             subMenu: [],
           },
         ],
       },
       {
         title: "Middle Eastern",
+        additionalQuery: "cuisine=middle=eastern",
         subMenu: [],
       },
     ],
   },
   {
     title: "Meat recipes",
+    additionalQuery: "",
     subMenu: [
       {
         title: "pork",
+        additionalQuery: "meatType=pork",
         subMenu: [],
       },
       {
-        title: "lamb",
+        title: "Lamb",
+        additionalQuery: "meatType=lamb",
         subMenu: [],
       },
       {
-        title: "beef",
+        title: "Beef",
+        additionalQuery: "meatType=beef",
         subMenu: [],
       },
       {
-        title: "chicken",
+        title: "Chicken",
+        additionalQuery: "meatType=chicken",
         subMenu: [],
       },
       {
-        title: "turkey",
+        title: "Turkey",
+        additionalQuery: "meatType=turkey",
         subMenu: [],
       },
       {
-        title: "duck",
+        title: "Duck",
+        additionalQuery: "meatType=duck",
         subMenu: [],
       },
       {
-        title: "buffalo",
+        title: "Buffalo",
+        additionalQuery: "meatType=buffalo",
         subMenu: [],
       },
     ],
   },
   {
     title: "Seafood",
+    additionalQuery: "meatType=seafood",
     subMenu: [],
   },
   {
     title: "Vegan",
+    additionalQuery: "diet=vegan",
     subMenu: [],
   },
   {
     title: "Vegetarian",
+    additionalQuery: "diet=vegetarian",
     subMenu: [],
   },
 ];

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { GetRandomRecipe, SearchRecipe } from "../../SpoonacularAPI/api";
 import { SearchRecipesByNeutralLanguage } from "../../SpoonacularAPI/recipe";
 import Card from "../../Components/Card/Card";
+import { useLocation } from "react-router";
 
 type Props = {};
 
@@ -12,14 +13,36 @@ const SearchRecipesPage = (props: Props) => {
     useState<SearchRecipesByNeutralLanguage>();
   const [serverError, setServerError] = useState<string>("");
   const numberOfRecipesToCall = 21;
+  const location = useLocation();
+  const firstQueryParam = useRef<string>("");
+  const secondQueryParam = useRef<string>("");
+
+  const getParams = async () => {
+    const queryParams = new URLSearchParams(location.search);
+    const cuisineParam = queryParams.get("cuisine");
+    const dietParam = queryParams.get("diet");
+    const meatParam = queryParams.get("meatType");
+
+    if (cuisineParam) {
+      secondQueryParam.current = `&cuisine=${cuisineParam}`;
+      firstQueryParam.current = "";
+    } else if (dietParam) {
+      secondQueryParam.current = `&diet=${dietParam}`;
+      firstQueryParam.current = "";
+    } else if (meatParam) {
+      firstQueryParam.current = `${meatParam}`;
+      secondQueryParam.current = "";
+    }
+  };
   const loadMoreRecipes = async () => {
     const recipesToSkip = searchResults?.offset
       ? searchResults?.offset + numberOfRecipesToCall
       : numberOfRecipesToCall;
     const result = await SearchRecipe(
-      params.queryTags!,
+      firstQueryParam.current,
       numberOfRecipesToCall,
-      recipesToSkip
+      recipesToSkip,
+      secondQueryParam.current
     );
     if (typeof result === "string") {
       setServerError(result);
@@ -38,7 +61,13 @@ const SearchRecipesPage = (props: Props) => {
 
   useEffect(() => {
     const getRecipes = async () => {
-      const result = await SearchRecipe(params.queryTags!);
+      getParams();
+      const result = await SearchRecipe(
+        firstQueryParam.current,
+        21,
+        0,
+        secondQueryParam.current
+      );
       if (typeof result === "string") {
         setServerError(result);
       } else if (Array.isArray(result.results)) {

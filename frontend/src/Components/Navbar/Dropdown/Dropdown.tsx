@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 interface MenuItem {
   title: string;
   subMenu: MenuItem[];
+  additionalQuery: string;
 }
 
 interface Props {
@@ -44,7 +45,9 @@ const DropdownMenu: React.FC<Props> = ({ config, subMenu, parent }: Props) => {
     } else {
       return (
         <Link
-          to={parent ? `/${item.title}` : `/${item.title}`}
+          to={`/${item.title}${
+            item.additionalQuery ? "?" + item.additionalQuery : ""
+          }`}
           className="decoration-neutral-50 "
         >
           <li

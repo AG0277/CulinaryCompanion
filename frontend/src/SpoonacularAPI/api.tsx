@@ -11,10 +11,11 @@ import {
 export const SearchRecipe = async (
   query: string = "",
   number: number = 21,
-  offset: number = 0
+  offset: number = 0,
+  additionalQuery: string = ""
 ) => {
   try {
-    const send = `https://api.spoonacular.com/recipes/complexSearch?query=${query.toLowerCase()}&offset=${offset.toString()}&instructionsRequired=true&number=${number.toString()}&apiKey=${
+    const send = `https://api.spoonacular.com/recipes/complexSearch?query=${query.toLowerCase()}${additionalQuery}&offset=${offset.toString()}&instructionsRequired=true&number=${number.toString()}&apiKey=${
       process.env.REACT_APP_API_KEY
     }`;
     const data = await axios.get<SearchRecipesByNeutralLanguage>(send);

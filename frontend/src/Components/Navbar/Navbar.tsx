@@ -4,9 +4,7 @@ import DropdownMenu from "./Dropdown/Dropdown";
 import SearchBar from "./Search/SearchBar";
 import { Link } from "react-router-dom";
 
-type Props = {
-  //h-14 bg-greenIsh flex flex-row items-center justify-center
-};
+type Props = {};
 
 const Navbar = memo(({}: Props) => {
   return (
