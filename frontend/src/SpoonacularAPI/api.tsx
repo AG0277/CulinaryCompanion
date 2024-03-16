@@ -18,6 +18,7 @@ export const SearchRecipe = async (
     const send = `https://api.spoonacular.com/recipes/complexSearch?query=${query.toLowerCase()}${additionalQuery}&offset=${offset.toString()}&instructionsRequired=true&number=${number.toString()}&apiKey=${
       process.env.REACT_APP_API_KEY
     }`;
+    //const send = `https://api.spoonacular.com/recipes/complexSearch?type=soup&number=200&apiKey=${process.env.REACT_APP_API_KEY}`;
     const data = await axios.get<SearchRecipesByNeutralLanguage>(send);
     return data.data;
   } catch (error: any) {

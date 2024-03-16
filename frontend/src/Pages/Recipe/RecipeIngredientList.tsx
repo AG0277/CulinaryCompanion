@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useRef } from "react";
 import { SearchFullRecipeById } from "../../SpoonacularAPI/recipe";
-import RecipeIngredient from "./RecipeIngredient";
+import RecipeIngredient from "../../Components/Recipe/RecipeIngredient";
 
 interface Props {
   searchFullRecipeById: SearchFullRecipeById;
 }
 
 const RecipeIngredientList = ({ searchFullRecipeById }: Props) => {
+  const uniqueIngredients = useRef(new Set());
   const htmlStringInstructions = searchFullRecipeById.instructions;
   const htmlStringSummary = searchFullRecipeById.summary;
+  const addValue = (newIngredient: number) => {
+    if (uniqueIngredients.current.has(newIngredient)) {
+      uniqueIngredients.current.add(newIngredient);
+      return false;
+    }
+    return true;
+  };
   return (
     <div className="flex flex-col">
       <div className="max-w-[556px] mx-auto ">
@@ -57,12 +65,18 @@ const RecipeIngredientList = ({ searchFullRecipeById }: Props) => {
         <ul className="list-disc pl-4">
           {searchFullRecipeById.extendedIngredients.length > 0 ? (
             searchFullRecipeById.extendedIngredients.map((result) => (
-              <li key={result.id}>
-                <RecipeIngredient
-                  measures={result.measures}
-                  name={result.name}
-                />
-              </li>
+              <>
+                {addValue(result.id) ? (
+                  <li key={result.id}>
+                    <RecipeIngredient
+                      measures={result.measures}
+                      name={result.name}
+                    />
+                  </li>
+                ) : (
+                  <></>
+                )}
+              </>
             ))
           ) : (
             <h1>No Results</h1>

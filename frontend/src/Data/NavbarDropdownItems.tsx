@@ -159,4 +159,45 @@ export const config = [
     additionalQuery: "diet=vegetarian",
     subMenu: [],
   },
+  {
+    title: "Meal types",
+    additionalQuery: "",
+    subMenu: [
+      {
+        title: "Main course",
+        additionalQuery: "mealType=main course",
+        subMenu: [],
+      },
+      {
+        title: "Dessert",
+        additionalQuery: "mealType=dessert",
+        subMenu: [],
+      },
+      {
+        title: "Salad",
+        additionalQuery: "mealType=salad",
+        subMenu: [],
+      },
+      {
+        title: "Bread",
+        additionalQuery: "mealType=bread",
+        subMenu: [],
+      },
+      {
+        title: "Breakfast",
+        additionalQuery: "mealType=breakfast",
+        subMenu: [],
+      },
+      {
+        title: "Soup",
+        additionalQuery: "mealType=soup",
+        subMenu: [],
+      },
+      {
+        title: "Fingerfood",
+        additionalQuery: "mealType=fingerfood",
+        subMenu: [],
+      },
+    ],
+  },
 ];

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FindRecipeById, getRecipeNutrition } from "../../SpoonacularAPI/api";
 import { Nutrients, SearchFullRecipeById } from "../../SpoonacularAPI/recipe";
-import RecipeIngredientList from "../../Components/Recipe/RecipeIngredientList";
+import RecipeIngredientList from "./RecipeIngredientList";
 
 type Props = {};
 

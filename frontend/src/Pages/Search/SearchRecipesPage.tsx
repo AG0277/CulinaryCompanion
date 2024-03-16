@@ -17,23 +17,6 @@ const SearchRecipesPage = (props: Props) => {
   const firstQueryParam = useRef<string>("");
   const secondQueryParam = useRef<string>("");
 
-  const getParams = async () => {
-    const queryParams = new URLSearchParams(location.search);
-    const cuisineParam = queryParams.get("cuisine");
-    const dietParam = queryParams.get("diet");
-    const meatParam = queryParams.get("meatType");
-
-    if (cuisineParam) {
-      secondQueryParam.current = `&cuisine=${cuisineParam}`;
-      firstQueryParam.current = "";
-    } else if (dietParam) {
-      secondQueryParam.current = `&diet=${dietParam}`;
-      firstQueryParam.current = "";
-    } else if (meatParam) {
-      firstQueryParam.current = `${meatParam}`;
-      secondQueryParam.current = "";
-    }
-  };
   const loadMoreRecipes = async () => {
     const recipesToSkip = searchResults?.offset
       ? searchResults?.offset + numberOfRecipesToCall
@@ -61,7 +44,25 @@ const SearchRecipesPage = (props: Props) => {
 
   useEffect(() => {
     const getRecipes = async () => {
-      getParams();
+      const queryParams = new URLSearchParams(location.search);
+      const cuisineParam = queryParams.get("cuisine");
+      const dietParam = queryParams.get("diet");
+      const meatParam = queryParams.get("meatType");
+      const mealTypeParam = queryParams.get("mealType");
+
+      if (cuisineParam) {
+        secondQueryParam.current = `&cuisine=${cuisineParam}`;
+        firstQueryParam.current = "";
+      } else if (dietParam) {
+        secondQueryParam.current = `&diet=${dietParam}`;
+        firstQueryParam.current = "";
+      } else if (meatParam) {
+        firstQueryParam.current = `${meatParam}`;
+        secondQueryParam.current = "";
+      } else if (mealTypeParam) {
+        secondQueryParam.current = `&type=${dietParam}`;
+        firstQueryParam.current = "";
+      }
       const result = await SearchRecipe(
         firstQueryParam.current,
         21,

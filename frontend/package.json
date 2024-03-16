@@ -51,6 +51,7 @@
     "@types/react": "^18.2.64",
     "@types/react-slick": "^0.23.13",
     "axios": "^1.6.7",
+    "prettier-plugin-tailwindcss": "^0.5.12",
     "tailwindcss": "^3.4.1"
   }
 }
