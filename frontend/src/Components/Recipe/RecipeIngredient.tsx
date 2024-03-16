@@ -23,8 +23,10 @@ const RecipeIngredient: React.FC<Props> = ({
   return (
     <div>
       <p>
-        {measures.metric.amount}&nbsp;
-        {measures.metric.unitLong}&nbsp;
+        <p className="font-bold">
+          {measures.metric.amount}
+          {measures.metric.unitLong}
+        </p>
         {name}
       </p>
     </div>

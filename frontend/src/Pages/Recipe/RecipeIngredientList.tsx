@@ -10,12 +10,12 @@ const RecipeIngredientList = ({ searchFullRecipeById }: Props) => {
   const uniqueIngredients = useRef(new Set());
   const htmlStringInstructions = searchFullRecipeById.instructions;
   const htmlStringSummary = searchFullRecipeById.summary;
-  const addValue = (newIngredient: number) => {
-    if (uniqueIngredients.current.has(newIngredient)) {
+  const addedValue = (newIngredient: number) => {
+    if (!uniqueIngredients.current.has(newIngredient)) {
       uniqueIngredients.current.add(newIngredient);
-      return false;
+      return true;
     }
-    return true;
+    return false;
   };
   return (
     <div className="flex flex-col">
@@ -66,7 +66,7 @@ const RecipeIngredientList = ({ searchFullRecipeById }: Props) => {
           {searchFullRecipeById.extendedIngredients.length > 0 ? (
             searchFullRecipeById.extendedIngredients.map((result) => (
               <>
-                {addValue(result.id) ? (
+                {addedValue(result.id) ? (
                   <li key={result.id}>
                     <RecipeIngredient
                       measures={result.measures}

@@ -5,6 +5,8 @@ import App from "../App";
 import SearchPage from "../Pages/Search/SearchPage";
 import HomePage from "../Pages/Home/HomePage";
 import SearchRecipesPage from "../Pages/Search/SearchRecipesPage";
+import LoginPage from "../Pages/Login/LoginPage";
+import RegisterPage from "../Pages/Register/RegisterPage";
 
 export const router = createBrowserRouter([
   {
@@ -16,7 +18,7 @@ export const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "/:queryTags",
+        path: ":queryTags",
         element: <SearchRecipesPage />,
       },
       {
@@ -26,6 +28,14 @@ export const router = createBrowserRouter([
       {
         path: "recipe/:recipeId",
         element: <RecipePage />,
+      },
+      {
+        path: "login",
+        element: <LoginPage />,
+      },
+      {
+        path: "register",
+        element: <RegisterPage />,
       },
     ],
   },

@@ -13,8 +13,8 @@ const RecommendedRecipes = (props: Props) => {
           <h5 className="w-fit font-bold border-b-4 border-orangeIsh">
             {category.title}
           </h5>
-          <div className="flex flex-col items-center">
-            <div key={category.title} className="flex">
+          <div className="flex flex-col items-center ">
+            <div key={category.title} className="flex justify-start">
               {category.foods.map((item) => (
                 <Card
                   recipeName={item.recipeName}
