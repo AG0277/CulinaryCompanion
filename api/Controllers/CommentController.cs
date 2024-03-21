@@ -3,7 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
+using api.Dtos.Comment;
+using api.Extensions;
+using api.Interfaces;
+using api.Models;
+using Azure.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
@@ -12,11 +18,16 @@ namespace api.Controllers
     [ApiController]
     public class CommentController : ControllerBase
     {
-        private readonly ApplicationDbContext db;
+        private readonly ICommentRepository commentRepository;
+        private readonly UserManager<AppUser> userManager;
 
-        public CommentController(ApplicationDbContext dbContext)
+        public CommentController(
+            ICommentRepository CommentRepository,
+            UserManager<AppUser> UserManager
+        )
         {
-            db = dbContext;
+            commentRepository = CommentRepository;
+            userManager = UserManager;
         }
 
         [HttpGet]
@@ -26,9 +37,25 @@ namespace api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create()
+        [Route("recipeId:int")]
+        [Authorize]
+        public async Task<IActionResult> Create(int recipeId, CreateCommentDto createCommentDto)
         {
-            return Ok();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var comment = new Comment
+            {
+                Content = createCommentDto.Content,
+                CreatedOn = DateTime.Now,
+                RecipeId = recipeId
+            };
+
+            var username = User.GetUsername();
+            var user = await userManager.FindByNameAsync(username);
+            comment.AppUserId = user.Id;
+            await commentRepository.CreateAsync(comment);
+            return Ok(comment);
         }
     }
 }

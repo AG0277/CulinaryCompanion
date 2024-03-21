@@ -17,6 +17,7 @@ namespace api.Data
 
         public DbSet<Comment> Comment { get; set; }
         public DbSet<Favorite> Favorite { get; set; }
+        public DbSet<Recipe> Recipe { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
