@@ -11,5 +11,8 @@ namespace api.Models
         public string Content { get; set; } = string.Empty;
         public DateTime CreatedOn { get; set; } = DateTime.Now;
         public int RecipeId { get; set; }
+        public Recipe Recipe { get; set; }
+        public string AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
     }
 }

@@ -4,13 +4,12 @@ import {
   SearchFullRecipeById,
   SearchRecipesByNeutralLanguage,
   Nutrients,
-  RecipeInfo,
   RandomRecipe,
 } from "./recipe";
 
 export const SearchRecipe = async (
   query: string = "",
-  number: number = 21,
+  number: number = 12,
   offset: number = 0,
   additionalQuery: string = ""
 ) => {
@@ -18,7 +17,6 @@ export const SearchRecipe = async (
     const send = `https://api.spoonacular.com/recipes/complexSearch?query=${query.toLowerCase()}${additionalQuery}&offset=${offset.toString()}&instructionsRequired=true&number=${number.toString()}&apiKey=${
       process.env.REACT_APP_API_KEY
     }`;
-    //const send = `https://api.spoonacular.com/recipes/complexSearch?type=soup&number=200&apiKey=${process.env.REACT_APP_API_KEY}`;
     const data = await axios.get<SearchRecipesByNeutralLanguage>(send);
     return data.data;
   } catch (error: any) {

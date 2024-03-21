@@ -12,7 +12,7 @@ const SearchRecipesPage = (props: Props) => {
   const [searchResults, setSearchResult] =
     useState<SearchRecipesByNeutralLanguage>();
   const [serverError, setServerError] = useState<string>("");
-  const numberOfRecipesToCall = 21;
+  const numberOfRecipesToCall = 12;
   const location = useLocation();
   const firstQueryParam = useRef<string>("");
   const secondQueryParam = useRef<string>("");
@@ -97,6 +97,7 @@ const SearchRecipesPage = (props: Props) => {
                 image={searchResult.image}
                 recipeName={searchResult.title}
                 id={searchResult.id}
+                css="m-5"
               />
             ))}
           </>

@@ -24,5 +24,11 @@ namespace api.Controllers
         {
             return Ok();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Create()
+        {
+            return Ok();
+        }
     }
 }

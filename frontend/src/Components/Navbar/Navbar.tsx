@@ -19,7 +19,7 @@ const Navbar = memo(({}: Props) => {
           </div>
           <div className="flex">
             <Link to={"/login"}>
-              <p className="text-lg hover:border p-2 hover:rounded-2xl hover:border-gray-500">
+              <p className="text-lg hover:border p-2 hover:rounded-2xl hover:border-gray-500 mx-2">
                 Login
               </p>
             </Link>
