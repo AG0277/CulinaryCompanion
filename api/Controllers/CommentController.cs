@@ -6,6 +6,7 @@ using api.Data;
 using api.Dtos.Comment;
 using api.Extensions;
 using api.Interfaces;
+using api.Mappers;
 using api.Models;
 using api.Repository;
 using Azure.Identity;
@@ -37,17 +38,37 @@ namespace api.Controllers
             spoonacularAPIService = SpoonacularAPIService;
         }
 
-        [HttpGet]
-        public IActionResult GetAll()
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            return Ok();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var comment = await commentRepository.GetByIdAsync(id);
+            if (comment == null)
+                return NotFound();
+
+            return Ok(comment.FromCommentToCommentDto());
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetBySpoonacularId([FromQuery] int recipeid)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            var commentList = await commentRepository.GetBySpoonacularIdAsync(recipeid);
+            if (commentList == null)
+                return NotFound();
+            var commentDto = commentList.Select(s => s.FromCommentToCommentDto());
+
+            return Ok(commentDto);
         }
 
         [HttpPost]
         [Route("spoonacularRecipeId:int")]
         [Authorize]
         public async Task<IActionResult> Create(
-            int spoonacularRecipeId,
+            [FromRoute] int spoonacularRecipeId,
             CreateCommentDto createCommentDto
         )
         {
@@ -66,16 +87,45 @@ namespace api.Controllers
                     spoonacularRecipeId
                 );
                 if (spoonacularAPIService == null)
-                {
-                    return BadRequest($"No recipe id {spoonacularRecipeId} found");
-                }
+                    return NotFound();
             }
             comment.RecipeId = recipeId.Id;
             var username = User.GetUsername();
             var user = await userManager.FindByNameAsync(username);
             comment.AppUserId = user.Id;
             await commentRepository.CreateAsync(comment);
-            return Ok(comment);
+            return CreatedAtAction(
+                nameof(GetById),
+                new { id = comment.Id },
+                comment.FromCommentToCommentDto()
+            );
+        }
+
+        [HttpPut]
+        [Route("{id:int}")]
+        public async Task<IActionResult> Update(
+            [FromBody] UpdateCommentDto updateCommentRequestDto,
+            [FromRoute] int id
+        )
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var updatedComment = await commentRepository.UpdateAsync(updateCommentRequestDto, id);
+            if (updatedComment == null)
+                return NotFound();
+            return Ok(updatedComment.FromCommentToCommentDto());
+        }
+
+        [HttpDelete]
+        [Route("{id:int}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            var comment = await commentRepository.DeleteAsync(id);
+            var commentDto = comment.FromCommentToCommentDto();
+            if (commentDto == null)
+                return NotFound();
+            return Ok(commentDto);
         }
     }
 }
