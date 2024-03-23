@@ -53,6 +53,17 @@ builder.Services.AddSwaggerGen(option =>
         }
     );
 });
+
+builder
+    .Services.AddControllers()
+    .AddNewtonsoftJson(options =>
+    {
+        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft
+            .Json
+            .ReferenceLoopHandling
+            .Ignore;
+    });
+
 builder
     .Services.AddIdentity<AppUser, IdentityRole>(options =>
     {
@@ -88,8 +99,11 @@ builder
     });
 
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<HttpClient>();
+builder.Services.AddHttpClient<ISpoonacularAPIService, SpoonacularAPIService>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

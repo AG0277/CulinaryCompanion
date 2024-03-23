@@ -7,6 +7,7 @@ using api.Dtos.Comment;
 using api.Extensions;
 using api.Interfaces;
 using api.Models;
+using api.Repository;
 using Azure.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -20,14 +21,20 @@ namespace api.Controllers
     {
         private readonly ICommentRepository commentRepository;
         private readonly UserManager<AppUser> userManager;
+        private readonly IRecipeRepository recipeRepository;
+        private readonly ISpoonacularAPIService spoonacularAPIService;
 
         public CommentController(
             ICommentRepository CommentRepository,
-            UserManager<AppUser> UserManager
+            UserManager<AppUser> UserManager,
+            IRecipeRepository RecipeRepository,
+            ISpoonacularAPIService SpoonacularAPIService
         )
         {
             commentRepository = CommentRepository;
             userManager = UserManager;
+            recipeRepository = RecipeRepository;
+            spoonacularAPIService = SpoonacularAPIService;
         }
 
         [HttpGet]
@@ -37,9 +44,12 @@ namespace api.Controllers
         }
 
         [HttpPost]
-        [Route("recipeId:int")]
+        [Route("spoonacularRecipeId:int")]
         [Authorize]
-        public async Task<IActionResult> Create(int recipeId, CreateCommentDto createCommentDto)
+        public async Task<IActionResult> Create(
+            int spoonacularRecipeId,
+            CreateCommentDto createCommentDto
+        )
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -48,9 +58,19 @@ namespace api.Controllers
             {
                 Content = createCommentDto.Content,
                 CreatedOn = DateTime.Now,
-                RecipeId = recipeId
             };
-
+            var recipeId = await recipeRepository.GetAsyncBySpoonacularId(spoonacularRecipeId);
+            if (recipeId == null)
+            {
+                recipeId = await spoonacularAPIService.GetRecipeBySpoonacularId(
+                    spoonacularRecipeId
+                );
+                if (spoonacularAPIService == null)
+                {
+                    return BadRequest($"No recipe id {spoonacularRecipeId} found");
+                }
+            }
+            comment.RecipeId = recipeId.Id;
             var username = User.GetUsername();
             var user = await userManager.FindByNameAsync(username);
             comment.AppUserId = user.Id;

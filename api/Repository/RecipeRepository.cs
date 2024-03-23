@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using api.Data;
 using api.Interfaces;
 using api.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace api.Repository
 {
@@ -15,6 +16,11 @@ namespace api.Repository
         public RecipeRepository(ApplicationDbContext context)
         {
             db = context;
+        }
+
+        public async Task<Recipe> GetAsyncBySpoonacularId(int spoonacularRecipeId)
+        {
+            return await db.Recipe.FirstOrDefaultAsync(x => x.IdSpoonacular == spoonacularRecipeId);
         }
 
         async Task<Recipe> IRecipeRepository.CreateAsync(Recipe recipe)

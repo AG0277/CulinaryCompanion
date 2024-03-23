@@ -8,6 +8,7 @@ namespace api.Interfaces
 {
     public interface IRecipeRepository
     {
+        Task<Recipe> GetAsyncBySpoonacularId(int spoonacularRecipeId);
         Task<Recipe> CreateAsync(Recipe recipe);
     }
 }
