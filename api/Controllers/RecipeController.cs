@@ -14,12 +14,10 @@ namespace api.Controllers
     [ApiController]
     public class RecipeController : ControllerBase
     {
-        private readonly ApplicationDbContext db;
         private readonly IRecipeRepository recipeRepository;
 
-        public RecipeController(ApplicationDbContext dbContext, IRecipeRepository RecipeRepository)
+        public RecipeController(IRecipeRepository RecipeRepository)
         {
-            db = dbContext;
             recipeRepository = RecipeRepository;
         }
 

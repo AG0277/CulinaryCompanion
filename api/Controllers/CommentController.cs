@@ -64,11 +64,10 @@ namespace api.Controllers
             return Ok(commentDto);
         }
 
-        [HttpPost]
-        [Route("spoonacularRecipeId:int")]
+        [HttpPost("{spoonacularRecipeId:int}")]
         [Authorize]
         public async Task<IActionResult> Create(
-            [FromRoute] int spoonacularRecipeId,
+            int spoonacularRecipeId,
             CreateCommentDto createCommentDto
         )
         {
@@ -101,6 +100,7 @@ namespace api.Controllers
             );
         }
 
+        //Authorize Update and DELETE
         [HttpPut]
         [Route("{id:int}")]
         public async Task<IActionResult> Update(
@@ -117,6 +117,7 @@ namespace api.Controllers
             return Ok(updatedComment.FromCommentToCommentDto());
         }
 
+        //Authorize Update and DELETE
         [HttpDelete]
         [Route("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)

@@ -103,6 +103,7 @@ builder.Services.AddScoped<HttpClient>();
 builder.Services.AddHttpClient<ISpoonacularAPIService, SpoonacularAPIService>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
+builder.Services.AddScoped<IFavoriteRepository, FavoriteRepository>();
 builder.Services.AddControllers(options => options.SuppressAsyncSuffixInActionNames = false);
 
 var app = builder.Build();
