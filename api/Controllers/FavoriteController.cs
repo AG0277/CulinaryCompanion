@@ -86,11 +86,17 @@ namespace api.Controllers
                 return BadRequest(ModelState);
 
             var favoriteToDelete = await favoriteRepository.GetByIdAsync(spoonacularrecipeid);
+            if (favoriteToDelete == null)
+                return NotFound();
             var username = User.GetUsername();
             var user = await userManager.FindByNameAsync(username);
-            if (favoriteToDelete.AppUser.Id != user.Id)
-                return Unauthorized();
 
+            var admin = await userManager.IsInRoleAsync(user, "admin");
+            if (!admin)
+            {
+                if (favoriteToDelete.AppUser.Id != user.Id)
+                    return Unauthorized();
+            }
             var favorite = await favoriteRepository.GetByIdAsync(spoonacularrecipeid);
             await favoriteRepository.DeleteAsync(favorite);
             return Ok(favorite.FromFavoriteToFavoriteDto());

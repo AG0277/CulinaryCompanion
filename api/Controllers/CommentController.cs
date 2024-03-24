@@ -100,7 +100,6 @@ namespace api.Controllers
             );
         }
 
-        //Authorize Update and DELETE
         [HttpPut]
         [Route("{id:int}")]
         [Authorize]
@@ -112,28 +111,41 @@ namespace api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             var comment = await commentRepository.GetByIdAsync(id);
-
+            if (comment == null)
+                return NotFound();
             var username = User.GetUsername();
             var user = await userManager.FindByNameAsync(username);
-            if (comment.AppUser.Id != user.Id)
-                return Unauthorized();
+
+            var admin = await userManager.IsInRoleAsync(user, "admin");
+            if (!admin)
+            {
+                if (comment.AppUser.Id != user.Id)
+                    return Unauthorized();
+            }
+
             var updatedComment = await commentRepository.UpdateAsync(updateCommentRequestDto, id);
             if (updatedComment == null)
                 return NotFound();
             return Ok(updatedComment.FromCommentToCommentDto());
         }
 
-        //Authorize Update and DELETE
         [HttpDelete]
         [Route("{id:int}")]
         [Authorize]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             var commentToDelete = await commentRepository.GetByIdAsync(id);
+            if (commentToDelete == null)
+                return NotFound();
             var username = User.GetUsername();
             var user = await userManager.FindByNameAsync(username);
-            if (commentToDelete.AppUser.Id != user.Id)
-                return Unauthorized();
+            var admin = await userManager.IsInRoleAsync(user, "admin");
+            if (!admin)
+            {
+                if (commentToDelete.AppUser.Id != user.Id)
+                    return Unauthorized();
+            }
+
             var comment = await commentRepository.DeleteAsync(id);
             var commentDto = comment.FromCommentToCommentDto();
             if (commentDto == null)
