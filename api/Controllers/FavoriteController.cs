@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.Extensions;
 using api.Interfaces;
+using api.Mappers;
 using api.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -43,21 +44,22 @@ namespace api.Controllers
             var username = User.GetUsername();
             var user = await userManager.FindByNameAsync(username);
             var favorite = await favoriteRepository.GetAllAsync(user);
-            return Ok(favorite);
+            var favoriteDto = favorite.Select(s => s.FromFavoriteToFavoriteDto());
+            return Ok(favoriteDto);
         }
 
         [HttpPost]
-        [Route("{recipeid}")]
+        [Route("{spoonacularrecipeid}")]
         [Authorize]
-        public async Task<IActionResult> Create(int recipeid)
+        public async Task<IActionResult> Create(int spoonacularrecipeid)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var recipe = await recipeRepository.GetAsyncBySpoonacularId(recipeid);
+            var recipe = await recipeRepository.GetAsyncBySpoonacularId(spoonacularrecipeid);
             if (recipe == null)
             {
-                recipe = await spoonacularAPIService.GetRecipeBySpoonacularId(recipeid);
+                recipe = await spoonacularAPIService.GetRecipeBySpoonacularId(spoonacularrecipeid);
                 if (recipe == null)
                 {
                     return NotFound();
@@ -69,21 +71,43 @@ namespace api.Controllers
             var favorite = new Favorite { AppUserId = user.Id, RecipeId = recipe.Id };
             favoriteRepository.CreateAsync(favorite);
 
-            return Ok(favorite);
+            return CreatedAtAction(
+                nameof(GetById),
+                new { spoonacularrecipeid = favorite.Recipe.IdSpoonacular },
+                favorite.FromFavoriteToFavoriteDto()
+            );
         }
 
-        [HttpDelete("{recipeid}")]
+        [HttpDelete("{spoonacularrecipeid}")]
         [Authorize]
-        public async Task<IActionResult> Delete(int recipeid)
+        public async Task<IActionResult> Delete(int spoonacularrecipeid)
         {
-            return Ok();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var favoriteToDelete = await favoriteRepository.GetByIdAsync(spoonacularrecipeid);
+            var username = User.GetUsername();
+            var user = await userManager.FindByNameAsync(username);
+            if (favoriteToDelete.AppUser.Id != user.Id)
+                return Unauthorized();
+
+            var favorite = await favoriteRepository.GetByIdAsync(spoonacularrecipeid);
+            await favoriteRepository.DeleteAsync(favorite);
+            return Ok(favorite.FromFavoriteToFavoriteDto());
         }
 
-        [HttpGet("{recipeid}")]
+        [HttpGet("{spoonacularrecipeid}")]
         [Authorize]
-        public async Task<IActionResult> GetById(int recipeid)
+        public async Task<IActionResult> GetById(int spoonacularrecipeid)
         {
-            return Ok();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var favorite = await favoriteRepository.GetByIdAsync(spoonacularrecipeid);
+            if (favorite == null)
+                return NotFound();
+
+            return Ok(favorite.FromFavoriteToFavoriteDto());
         }
     }
 }

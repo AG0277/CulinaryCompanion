@@ -4,6 +4,8 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./Routes/Routes";
+import { SearchFullRecipeById } from "./SpoonacularAPI/recipe";
+import axios from "axios";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

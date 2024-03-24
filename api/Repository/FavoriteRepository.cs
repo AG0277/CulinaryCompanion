@@ -28,7 +28,9 @@ namespace api.Repository
 
         public async Task<Favorite> DeleteAsync(Favorite favorite)
         {
-            throw new NotImplementedException();
+            db.Remove(favorite);
+            await db.SaveChangesAsync();
+            return favorite;
         }
 
         public async Task<List<Favorite>> GetAllAsync(AppUser appUser)
@@ -36,9 +38,11 @@ namespace api.Repository
             return await db.Favorite.Where(x => x.AppUserId == appUser.Id).ToListAsync();
         }
 
-        public async Task<Favorite> GetByIdAsync()
+        public async Task<Favorite> GetByIdAsync(int recipeid)
         {
-            throw new NotImplementedException();
+            return await db
+                .Favorite.Include(a => a.AppUser)
+                .FirstOrDefaultAsync(x => x.Recipe.IdSpoonacular == recipeid);
         }
     }
 }

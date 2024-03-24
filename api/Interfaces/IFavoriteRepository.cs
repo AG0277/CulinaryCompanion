@@ -8,7 +8,7 @@ namespace api.Interfaces
 {
     public interface IFavoriteRepository
     {
-        Task<Favorite> GetByIdAsync();
+        Task<Favorite> GetByIdAsync(int recipeid);
         Task<Favorite> CreateAsync(Favorite favorite);
         Task<Favorite> DeleteAsync(Favorite favorite);
         Task<List<Favorite>> GetAllAsync(AppUser appUser);

@@ -103,6 +103,7 @@ namespace api.Controllers
         //Authorize Update and DELETE
         [HttpPut]
         [Route("{id:int}")]
+        [Authorize]
         public async Task<IActionResult> Update(
             [FromBody] UpdateCommentDto updateCommentRequestDto,
             [FromRoute] int id
@@ -110,7 +111,12 @@ namespace api.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+            var comment = await commentRepository.GetByIdAsync(id);
 
+            var username = User.GetUsername();
+            var user = await userManager.FindByNameAsync(username);
+            if (comment.AppUser.Id != user.Id)
+                return Unauthorized();
             var updatedComment = await commentRepository.UpdateAsync(updateCommentRequestDto, id);
             if (updatedComment == null)
                 return NotFound();
@@ -120,8 +126,14 @@ namespace api.Controllers
         //Authorize Update and DELETE
         [HttpDelete]
         [Route("{id:int}")]
+        [Authorize]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
+            var commentToDelete = await commentRepository.GetByIdAsync(id);
+            var username = User.GetUsername();
+            var user = await userManager.FindByNameAsync(username);
+            if (commentToDelete.AppUser.Id != user.Id)
+                return Unauthorized();
             var comment = await commentRepository.DeleteAsync(id);
             var commentDto = comment.FromCommentToCommentDto();
             if (commentDto == null)
