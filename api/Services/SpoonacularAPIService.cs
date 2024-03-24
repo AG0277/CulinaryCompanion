@@ -37,11 +37,6 @@ namespace api.Services
                 var result = await httpClient.GetAsync(test);
                 if (result.IsSuccessStatusCode)
                 {
-                    var content = await result.Content.ReadAsStringAsync();
-                    var task = JsonConvert.DeserializeObject(content);
-                    // TO DO check if it works
-                    if (task == null)
-                        return null;
                     var recipe = new Recipe { IdSpoonacular = id };
                     await recipeRepository.CreateAsync(recipe);
                     return recipe;
