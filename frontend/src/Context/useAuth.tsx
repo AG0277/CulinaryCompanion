@@ -26,15 +26,15 @@ export const UserProvider = ({ children }: Props) => {
 
   useEffect(() => {
     setIsReady(true);
-    axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+    axios.defaults.headers.common["Authorization"] = "Bearer" + token;
   }, []);
 
   const registerUser = async (
     email: string,
     username: string,
-    passowrd: string
+    password: string
   ) => {
-    await registerAPI(email, username, passowrd)
+    await registerAPI(email, username, password)
       .then((res?) => {
         if (res) {
           localStorage.setItem("token", res.data.token);
@@ -50,12 +50,12 @@ export const UserProvider = ({ children }: Props) => {
           navigate("/homepage");
         }
       })
-      .catch((e) => toast.warning("Server error occurred"));
+      .catch((e) => toast.warning("Server error occurred" + e));
   };
 
-  const loginUser = async (username: string, passowrd: string) => {
-    await loginAPI(username, passowrd)
-      .then((res?) => {
+  const loginUser = async (username: string, password: string) => {
+    await loginAPI(username, password)
+      .then((res) => {
         if (res) {
           localStorage.setItem("token", res.data.token);
           const userObj = {
