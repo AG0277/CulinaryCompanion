@@ -11,11 +11,7 @@ namespace api.Mappers
     {
         public static FavoriteDto FromFavoriteToFavoriteDto(this Favorite favorite)
         {
-            return new FavoriteDto
-            {
-                Username = favorite.AppUser.UserName,
-                RecipeId = favorite.RecipeId
-            };
+            return new FavoriteDto { RecipeId = favorite.Recipe.IdSpoonacular };
         }
     }
 }

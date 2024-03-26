@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../Context/useAuth";
+import { useAuth } from "../../Hooks/useAuth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
@@ -25,9 +25,7 @@ const validation = Yup.object().shape({
     .required("email is required"),
   password: Yup.string()
     .required("Please enter a password")
-    // check minimum characters
     .min(8, "Password must have at least 8 characters")
-    // different error messages for different requirements
     .matches(/[0-9]/, getCharacterValidationError("digit"))
     .matches(/[a-z]/, getCharacterValidationError("lowercase character"))
     .matches(/[A-Z]/, getCharacterValidationError("uppercase character"))

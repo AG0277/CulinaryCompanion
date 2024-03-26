@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as Yup from "yup";
-import { useAuth } from "../../Context/useAuth";
+import { useAuth } from "../../Hooks/useAuth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";

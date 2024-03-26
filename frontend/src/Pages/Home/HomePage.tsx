@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { GetRandomRecipe } from "../../SpoonacularAPI/api";
-import { RandomRecipe } from "../../SpoonacularAPI/recipe";
-import Slider from "react-slick";
-import Card from "../../Components/Card/Card";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./HomePage.css";
 import SliderComponent from "./SliderComponent";
 import RecommendedRecipes from "./RecommendedRecipes";
+import { addFavorite } from "../../Services/FavoriteService";
+import { useAuth } from "../../Hooks/useAuth";
+import { toast } from "react-toastify";
 
 type Props = {};
 

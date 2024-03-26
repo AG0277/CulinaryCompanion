@@ -35,7 +35,10 @@ namespace api.Repository
 
         public async Task<List<Favorite>> GetAllAsync(AppUser appUser)
         {
-            return await db.Favorite.Where(x => x.AppUserId == appUser.Id).ToListAsync();
+            return await db
+                .Favorite.Include(r => r.Recipe)
+                .Where(x => x.AppUserId == appUser.Id)
+                .ToListAsync();
         }
 
         public async Task<Favorite> GetByIdAsync(int recipeid)

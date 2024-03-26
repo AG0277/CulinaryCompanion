@@ -3,7 +3,7 @@ import { config } from "../../Data/NavbarDropdownItems";
 import DropdownMenu from "./Dropdown/Dropdown";
 import SearchBar from "./Search/SearchBar";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../Context/useAuth";
+import { useAuth } from "../../Hooks/useAuth";
 
 type Props = {};
 

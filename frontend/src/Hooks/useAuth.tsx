@@ -4,6 +4,7 @@ import { loginAPI, registerAPI } from "../Services/AuthService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import { useFavoriteRecipes } from "./useFavoriteRecipes";
 
 export type UserContextType = {
   user: UserProfile | null;
@@ -23,10 +24,17 @@ export const UserProvider = ({ children }: Props) => {
   const [token, setToken] = useState<string | null>("");
   const [user, setUser] = useState<UserProfile | null>(null);
   const [isReady, setIsReady] = useState(false);
+  const { getFavorites } = useFavoriteRecipes();
 
   useEffect(() => {
+    const user = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+    if (user && token) {
+      setUser(JSON.parse(user));
+      setToken(token);
+      axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+    }
     setIsReady(true);
-    axios.defaults.headers.common["Authorization"] = "Bearer" + token;
   }, []);
 
   const registerUser = async (
@@ -45,8 +53,8 @@ export const UserProvider = ({ children }: Props) => {
           localStorage.setItem("user", JSON.stringify(userObj));
           setToken(res.data.token);
           setUser(userObj);
-          toast.success("Register success");
-          axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+          axios.defaults.headers.common["Authorization"] =
+            "Bearer " + res.data.token;
           navigate("/homepage");
         }
       })
@@ -66,8 +74,11 @@ export const UserProvider = ({ children }: Props) => {
           setToken(res.data.token);
           setUser(userObj);
           toast.success("Login success");
-          axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+          console.log(token);
+          axios.defaults.headers.common["Authorization"] =
+            "Bearer " + res.data.token;
           navigate("/homepage");
+          getFavorites();
         }
       })
       .catch((e) => toast.warning("Server error occurred"));
@@ -79,6 +90,7 @@ export const UserProvider = ({ children }: Props) => {
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    localStorage.removeItem("favorites");
     setUser(null);
     setToken("");
     delete axios.defaults.headers.common["Authorization"];
