@@ -34,18 +34,18 @@ export const UserProvider = ({ children }: Props) => {
     username: string,
     password: string
   ) => {
-    await registerAPI(email, username, password)
+    await registerAPI(username, email, password)
       .then((res?) => {
         if (res) {
           localStorage.setItem("token", res.data.token);
           const userObj = {
-            userName: res.data.userName,
+            username: res.data.username,
             email: res.data.email,
           };
           localStorage.setItem("user", JSON.stringify(userObj));
           setToken(res.data.token);
           setUser(userObj);
-          toast.success("Login success");
+          toast.success("Register success");
           axios.defaults.headers.common["Authorization"] = "Bearer " + token;
           navigate("/homepage");
         }
@@ -59,7 +59,7 @@ export const UserProvider = ({ children }: Props) => {
         if (res) {
           localStorage.setItem("token", res.data.token);
           const userObj = {
-            userName: res.data.userName,
+            username: res.data.username,
             email: res.data.email,
           };
           localStorage.setItem("user", JSON.stringify(userObj));

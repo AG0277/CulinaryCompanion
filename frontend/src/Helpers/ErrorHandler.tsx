@@ -13,8 +13,12 @@ export const handleError = (error: any) => {
         toast.warning(err.data.errors[e][0]);
       }
     } else if (err?.data) {
-      for (var i = 0; i < err.data.length; i++) {
-        toast.warning(err.data[i].description);
+      if (Array.isArray(err?.data)) {
+        for (var i = 0; i < err.data.length; i++) {
+          toast.warning(err.data[i].description);
+        }
+      } else {
+        toast.warning(err.data);
       }
     } else if (err?.status === 401) {
       toast.warning("Please login");
