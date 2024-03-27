@@ -3,7 +3,7 @@ import { handleError } from "../Helpers/ErrorHandler";
 
 const api = "http://localhost:5095/api/";
 
-export const addFavorite = async (spoonacularId: string) => {
+export const addFavoriteAPI = async (spoonacularId: number) => {
   try {
     const data = await axios.post(api + `favorite/${spoonacularId}`);
     return data;
@@ -12,7 +12,7 @@ export const addFavorite = async (spoonacularId: string) => {
   }
 };
 
-export const getFavorite = async () => {
+export const getFavoriteAPI = async () => {
   try {
     const data = await axios.get(api + `favorite/`);
     return data;
@@ -20,7 +20,7 @@ export const getFavorite = async () => {
     handleError(error);
   }
 };
-export const deleteFavorite = async (recipeId: string) => {
+export const deleteFavoriteAPI = async (recipeId: number) => {
   try {
     const data = await axios.delete(api + `favorite/${recipeId}`);
     return data;

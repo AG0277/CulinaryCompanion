@@ -44,7 +44,7 @@ namespace api.Repository
         public async Task<Favorite> GetByIdAsync(int recipeid)
         {
             return await db
-                .Favorite.Include(a => a.AppUser)
+                .Favorite.Include(a => a.Recipe)
                 .FirstOrDefaultAsync(x => x.Recipe.IdSpoonacular == recipeid);
         }
     }

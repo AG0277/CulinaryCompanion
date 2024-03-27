@@ -3,9 +3,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "./HomePage.css";
 import SliderComponent from "./SliderComponent";
 import RecommendedRecipes from "./RecommendedRecipes";
-import { addFavorite } from "../../Services/FavoriteService";
-import { useAuth } from "../../Hooks/useAuth";
-import { toast } from "react-toastify";
+import { FavoritesProvider } from "../../Hooks/useFavorite";
 
 type Props = {};
 
@@ -18,8 +16,10 @@ const HomePage = (props: Props) => {
           <h5 className="w-fit font-bold border-b-4 border-orangeIsh">
             Discover our latest creations
           </h5>
-          <SliderComponent />
-          <RecommendedRecipes />
+          <FavoritesProvider>
+            <SliderComponent />
+            <RecommendedRecipes />
+          </FavoritesProvider>
         </div>
       </div>
       <div className="bg-yellowIsh w-full pt-80"></div>

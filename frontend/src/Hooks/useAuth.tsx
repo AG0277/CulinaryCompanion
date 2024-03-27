@@ -4,7 +4,7 @@ import { loginAPI, registerAPI } from "../Services/AuthService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import axios from "axios";
-import { useFavoriteRecipes } from "./useFavoriteRecipes";
+import { useFavorites } from "./useFavorite";
 
 export type UserContextType = {
   user: UserProfile | null;
@@ -24,7 +24,6 @@ export const UserProvider = ({ children }: Props) => {
   const [token, setToken] = useState<string | null>("");
   const [user, setUser] = useState<UserProfile | null>(null);
   const [isReady, setIsReady] = useState(false);
-  const { getFavorites } = useFavoriteRecipes();
 
   useEffect(() => {
     const user = localStorage.getItem("user");
@@ -78,7 +77,6 @@ export const UserProvider = ({ children }: Props) => {
           axios.defaults.headers.common["Authorization"] =
             "Bearer " + res.data.token;
           navigate("/homepage");
-          getFavorites();
         }
       })
       .catch((e) => toast.warning("Server error occurred"));
@@ -94,6 +92,7 @@ export const UserProvider = ({ children }: Props) => {
     setUser(null);
     setToken("");
     delete axios.defaults.headers.common["Authorization"];
+    window.location.reload();
     navigate("/");
   };
 
