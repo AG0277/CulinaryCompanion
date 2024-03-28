@@ -2,10 +2,17 @@ import React, { useState } from "react";
 import { RandomRecipe } from "../../SpoonacularAPI/recipe";
 import { MealCategory, homeRecipeData } from "../../Data/RecommendedRecipes";
 import Card from "../../Components/Card/Card";
+import { useNavigate } from "react-router";
 
 type Props = {};
 
-const RecommendedRecipes = (props: Props) => {
+const RecommendedRecipes: React.FC<Props> = (props: Props): JSX.Element => {
+  const navigate = useNavigate();
+  const handleClick = (category: string) => {
+    console.log(category);
+    if (category == "Breakfast") navigate(`/${category}`);
+    else if (category == "Beef") navigate(`/${category}`);
+  };
   return (
     <div>
       {homeRecipeData.map((category: MealCategory) => (
@@ -23,7 +30,10 @@ const RecommendedRecipes = (props: Props) => {
                 />
               ))}
             </div>
-            <button className="bg bg-greenIsh my-5 w-40 h-12 rounded-2xl">
+            <button
+              className="bg bg-greenIsh my-5 w-40 h-12 rounded-2xl"
+              onClick={() => handleClick(category.title)}
+            >
               See more
             </button>
           </div>

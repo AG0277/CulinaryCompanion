@@ -32,7 +32,6 @@ export const FavoritesProvider = ({ children }: Props) => {
         getFavorites();
       }
     }
-    console.log(favoriteRecipesSet);
     setIsReady(true);
   }, []);
 
@@ -75,10 +74,15 @@ export const FavoritesProvider = ({ children }: Props) => {
     });
   };
   const isFavorite = (recipeId: number) => {
-    const exists = favoriteRecipesSet?.find(
-      (x) => x.recipeId == recipeId.toString()
-    );
-    return !!exists;
+    if (Array.isArray(favoriteRecipesSet)) {
+      const exists = favoriteRecipesSet.find(
+        (x) => x.recipeId == recipeId.toString()
+      );
+      console.log(typeof favoriteRecipesSet);
+
+      return !!exists;
+    }
+    return false;
   };
   return (
     <FavoriteContext.Provider

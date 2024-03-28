@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { GetRandomRecipe, SearchRecipe } from "../../SpoonacularAPI/api";
 import { SearchRecipesByNeutralLanguage } from "../../SpoonacularAPI/recipe";
 import Card from "../../Components/Card/Card";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 type Props = {};
 
@@ -16,6 +16,7 @@ const SearchRecipesPage = (props: Props) => {
   const location = useLocation();
   const firstQueryParam = useRef<string>("");
   const secondQueryParam = useRef<string>("");
+  const navigate = useNavigate();
 
   const loadMoreRecipes = async () => {
     const recipesToSkip = searchResults?.offset
@@ -62,7 +63,10 @@ const SearchRecipesPage = (props: Props) => {
       } else if (mealTypeParam) {
         secondQueryParam.current = `&type=${dietParam}`;
         firstQueryParam.current = "";
+      } else if (params.queryTags == "Favorites") {
+        navigate("/favorites");
       }
+
       const result = await SearchRecipe(
         firstQueryParam.current,
         21,

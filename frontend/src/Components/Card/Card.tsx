@@ -20,20 +20,26 @@ const Card: React.FC<Props> = ({
     e.preventDefault();
   };
   return (
-    <div
-      className={`${css} mr-8 rounded border-1 shadow-md  hover:cursor-pointer max-w-[312px]`}
-    >
-      <Link to={`/recipe/${id}`}>
-        <div className="" onClick={handleClick}>
-          <AddFavoriteComponent spoonacularId={id} />
-        </div>
-        <div className="flex flex-col">
-          <img className="max-h-[231px]" src={image} alt="" />
+    <>
+      {image && (
+        <div
+          className={`${css} mr-8 rounded border-1 shadow-md  hover:cursor-pointer max-w-[312px]`}
+        >
+          <Link to={`/recipe/${id}`}>
+            <div className="" onClick={handleClick}>
+              <AddFavoriteComponent spoonacularId={id} />
+            </div>
+            <div className="flex flex-col">
+              <img className="max-h-[231px]" src={image} alt="" />
 
-          <p className=" mt-5 h-20 overflow-hidden text-center">{recipeName}</p>
+              <p className=" mt-5 h-20 overflow-hidden text-center">
+                {recipeName}
+              </p>
+            </div>
+          </Link>
         </div>
-      </Link>
-    </div>
+      )}
+    </>
   );
 };
 

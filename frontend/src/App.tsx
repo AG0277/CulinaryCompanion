@@ -10,9 +10,11 @@ function App() {
   return (
     <>
       <UserProvider>
-        <Navbar />
-        <Outlet />
-        <ToastContainer />
+        <FavoritesProvider>
+          <Navbar />
+          <Outlet />
+          <ToastContainer />
+        </FavoritesProvider>
       </UserProvider>
     </>
   );

@@ -23,7 +23,7 @@ const AddFavoriteComponent = ({ spoonacularId }: Props) => {
       if (isFavorite(spoonacularId)) {
         removeFavorite(spoonacularId);
       } else {
-        const result = addFavorite(spoonacularId);
+        addFavorite(spoonacularId);
       }
     } else {
       toast.warning("login to continue");

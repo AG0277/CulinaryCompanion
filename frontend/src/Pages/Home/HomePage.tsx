@@ -16,10 +16,8 @@ const HomePage = (props: Props) => {
           <h5 className="w-fit font-bold border-b-4 border-orangeIsh">
             Discover our latest creations
           </h5>
-          <FavoritesProvider>
-            <SliderComponent />
-            <RecommendedRecipes />
-          </FavoritesProvider>
+          <SliderComponent />
+          <RecommendedRecipes />
         </div>
       </div>
       <div className="bg-yellowIsh w-full pt-80"></div>

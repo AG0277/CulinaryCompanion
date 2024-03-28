@@ -200,4 +200,9 @@ export const config = [
       },
     ],
   },
+  {
+    title: "Favorites",
+    additionalQuery: "",
+    subMenu: [],
+  },
 ];
