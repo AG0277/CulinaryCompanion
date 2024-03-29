@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AddFavorite from "../Favorite/AddFavorite";
 import AddFavoriteComponent from "../Favorite/AddFavorite";
+import { title } from "process";
 
 interface Props {
   recipeName: string;
@@ -27,7 +28,11 @@ const Card: React.FC<Props> = ({
         >
           <Link to={`/recipe/${id}`}>
             <div className="" onClick={handleClick}>
-              <AddFavoriteComponent spoonacularId={id} />
+              <AddFavoriteComponent
+                spoonacularId={id}
+                title={title}
+                image={image}
+              />
             </div>
             <div className="flex flex-col">
               <img className="max-h-[231px]" src={image} alt="" />

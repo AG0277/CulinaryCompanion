@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import * as Yup from "yup";
 import { useAuth } from "../../Hooks/useAuth";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useFavorites } from "../../Hooks/useFavorite";
 
 type Props = {};
 
@@ -18,6 +19,8 @@ const validation = Yup.object().shape({
 });
 const LoginPage = (props: Props) => {
   const { loginUser } = useAuth();
+  const { getFavorites } = useFavorites();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -25,8 +28,9 @@ const LoginPage = (props: Props) => {
   } = useForm<LoginFormInputs>({
     resolver: yupResolver(validation),
   });
-  const handleLogin = (form: LoginFormInputs) => {
-    loginUser(form.username, form.password);
+  const handleLogin = async (form: LoginFormInputs) => {
+    await loginUser(form.username, form.password);
+    getFavorites();
   };
 
   return (

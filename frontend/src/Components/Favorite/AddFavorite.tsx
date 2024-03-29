@@ -6,9 +6,11 @@ import { Favorite } from "../../Models/Favorite";
 
 type Props = {
   spoonacularId: number;
+  title: string;
+  image: string;
 };
 
-const AddFavoriteComponent = ({ spoonacularId }: Props) => {
+const AddFavoriteComponent = ({ spoonacularId, title, image }: Props) => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const { isLoggedIn } = useAuth();
   const { isFavorite, addFavorite, removeFavorite, favoriteRecipesSet } =
@@ -23,7 +25,7 @@ const AddFavoriteComponent = ({ spoonacularId }: Props) => {
       if (isFavorite(spoonacularId)) {
         removeFavorite(spoonacularId);
       } else {
-        addFavorite(spoonacularId);
+        addFavorite(spoonacularId, title, image);
       }
     } else {
       toast.warning("login to continue");

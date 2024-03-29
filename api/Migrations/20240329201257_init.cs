@@ -58,7 +58,9 @@ namespace api.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdSpoonacular = table.Column<int>(type: "int", nullable: false)
+                    IdSpoonacular = table.Column<int>(type: "int", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -228,8 +230,8 @@ namespace api.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "360fb6eb-8ee4-4f6c-ab20-3dd404cd87be", null, "User", "USER" },
-                    { "bbc998a0-e0cb-43f3-85b3-de7437d739c2", null, "Admin", "ADMIN" }
+                    { "16ca8e70-7525-498b-9ae3-5dab4873c94d", null, "Admin", "ADMIN" },
+                    { "b8045674-d46a-4ef6-9dd2-40fdb058787f", null, "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(

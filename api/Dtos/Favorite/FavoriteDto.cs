@@ -8,5 +8,7 @@ namespace api.Dtos.Favorite
     public class FavoriteDto
     {
         public int RecipeId { get; set; }
+        public string Title { get; set; } = string.Empty;
+        public string Image { get; set; } = string.Empty;
     }
 }

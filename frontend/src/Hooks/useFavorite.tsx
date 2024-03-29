@@ -9,7 +9,7 @@ import { Favorite } from "../Models/Favorite";
 
 export type FavoriteContextType = {
   favoriteRecipesSet: Favorite[] | null;
-  addFavorite: (recipeId: number) => void;
+  addFavorite: (recipeId: number, title: string, image: string) => void;
   removeFavorite: (recipeId: number) => void;
   getFavorites: () => void;
   isFavorite: (recipeId: number) => boolean;
@@ -35,10 +35,19 @@ export const FavoritesProvider = ({ children }: Props) => {
     setIsReady(true);
   }, []);
 
-  const addFavorite = async (recipeId: number) => {
+  const addFavorite = async (
+    recipeId: number,
+    titles: string,
+    images: string
+  ) => {
     await addFavoriteAPI(recipeId).then((res) => {
       const updatedFavorites = [...favoriteRecipesSet];
-      updatedFavorites.push({ recipeId: recipeId.toString() });
+      const fav: Favorite = {
+        recipeId: recipeId.toString(),
+        image: images,
+        title: titles,
+      };
+      updatedFavorites.push(fav);
       localStorage.setItem(
         "favorites",
         JSON.stringify(Array.from(updatedFavorites))

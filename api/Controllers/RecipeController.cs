@@ -23,12 +23,17 @@ namespace api.Controllers
 
         [HttpPost]
         [Route("recipeId:int")]
-        public async Task<IActionResult> Create(int recipeId)
+        public async Task<IActionResult> Create(int recipeId, string title = "", string image = "")
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var recipe = new Recipe { IdSpoonacular = recipeId };
+            var recipe = new Recipe
+            {
+                IdSpoonacular = recipeId,
+                Title = title,
+                Image = image
+            };
             var recipeModel = await recipeRepository.CreateAsync(recipe);
             return Ok(recipeModel);
         }

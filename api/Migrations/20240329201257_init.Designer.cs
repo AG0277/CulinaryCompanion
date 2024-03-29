@@ -12,7 +12,7 @@ using api.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240323151625_init")]
+    [Migration("20240329201257_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -54,13 +54,13 @@ namespace api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bbc998a0-e0cb-43f3-85b3-de7437d739c2",
+                            Id = "16ca8e70-7525-498b-9ae3-5dab4873c94d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "360fb6eb-8ee4-4f6c-ab20-3dd404cd87be",
+                            Id = "b8045674-d46a-4ef6-9dd2-40fdb058787f",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -293,6 +293,14 @@ namespace api.Migrations
 
                     b.Property<int>("IdSpoonacular")
                         .HasColumnType("int");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

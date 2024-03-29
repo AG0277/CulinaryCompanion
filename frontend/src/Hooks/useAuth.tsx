@@ -54,7 +54,7 @@ export const UserProvider = ({ children }: Props) => {
           setUser(userObj);
           axios.defaults.headers.common["Authorization"] =
             "Bearer " + res.data.token;
-          navigate("/homepage");
+          navigate("/");
         }
       })
       .catch((e) => toast.warning("Server error occurred" + e));
@@ -76,7 +76,7 @@ export const UserProvider = ({ children }: Props) => {
           console.log(token);
           axios.defaults.headers.common["Authorization"] =
             "Bearer " + res.data.token;
-          navigate("/homepage");
+          navigate("/");
         }
       })
       .catch((e) => toast.warning("Server error occurred"));
