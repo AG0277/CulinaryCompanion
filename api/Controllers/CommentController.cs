@@ -59,9 +59,9 @@ namespace api.Controllers
             var commentList = await commentRepository.GetBySpoonacularIdAsync(recipeid);
             if (commentList == null)
                 return NotFound();
-            var commentDto = commentList.Select(s => s.FromCommentToCommentDto());
+            var getCommentDto = commentList.Select(s => s.FromCommentToGetCommentDto());
 
-            return Ok(commentDto);
+            return Ok(getCommentDto);
         }
 
         [HttpPost("{spoonacularRecipeId:int}")]

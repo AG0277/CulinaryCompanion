@@ -20,5 +20,17 @@ namespace api.Mappers
                 RecipeId = comment.RecipeId
             };
         }
+
+        public static GetCommentDto FromCommentToGetCommentDto(this Comment comment)
+        {
+            return new GetCommentDto
+            {
+                Id = comment.Id,
+                Content = comment.Content,
+                CreatedOn = comment.CreatedOn.ToString("yyyy-MM-dd"),
+                CreatedBy = comment.AppUser.UserName,
+                RecipeId = comment.RecipeId
+            };
+        }
     }
 }

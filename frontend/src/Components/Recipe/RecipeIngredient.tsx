@@ -21,14 +21,11 @@ const RecipeIngredient: React.FC<Props> = ({
   name,
 }: Props): JSX.Element => {
   return (
-    <div>
-      <p>
-        <p className="font-bold">
-          {measures.metric.amount}
-          {measures.metric.unitLong}
-        </p>
-        {name}
+    <div className="flex">
+      <p className="font-bold mr-1">
+        {measures.metric.amount} {measures.metric.unitShort}
       </p>
+      {name}
     </div>
   );
 };

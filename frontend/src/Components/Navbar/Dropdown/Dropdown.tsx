@@ -39,7 +39,11 @@ const DropdownMenu: React.FC<Props> = ({ config, subMenu, parent }: Props) => {
           }`}
         >
           {item.title}
-          <DropdownMenu parent={item.title} config={item.subMenu} />
+          <DropdownMenu
+            key={item.title + "a"}
+            parent={item.title}
+            config={item.subMenu}
+          />
         </li>
       );
     } else {

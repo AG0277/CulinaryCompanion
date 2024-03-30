@@ -4,6 +4,7 @@ import "./HomePage.css";
 import SliderComponent from "./SliderComponent";
 import RecommendedRecipes from "./RecommendedRecipes";
 import { FavoritesProvider } from "../../Hooks/useFavorite";
+import Comments from "../../Components/Comment/Comments";
 
 type Props = {};
 
@@ -18,6 +19,7 @@ const HomePage = (props: Props) => {
           </h5>
           <SliderComponent />
           <RecommendedRecipes />
+          <Comments recipeId={1096087} />
         </div>
       </div>
       <div className="bg-yellowIsh w-full pt-80"></div>
