@@ -35,7 +35,7 @@ const Card: React.FC<Props> = ({
               />
             </div>
             <div className="flex flex-col">
-              <img className="max-h-[231px]" src={image} alt="" />
+              <img className="max-h-[231px] " src={image} alt="" />
 
               <p className=" mt-5 h-20 overflow-hidden text-center">
                 {recipeName}

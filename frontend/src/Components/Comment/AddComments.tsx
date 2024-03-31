@@ -37,18 +37,18 @@ const AddComments = ({ recipeId, onAddComment }: Props) => {
           placeholder="Add comment"
           className="bg-transparent resize-none focus:outline-none hover:cursor-auto"
         ></ReactTextareaAutosize>
-        <hr />
+        <hr className="border-t-2 border-gray-400 " />
         <br></br>
         <br></br>
         <button
           type="submit"
-          className="rounded-xl min-h-8 min-w-24 bg-greenIsh absolute bottom-0 right-0"
+          className="rounded-xl min-h-8 min-w-24 bg-buttonColor absolute bottom-0 right-0"
         >
           Comment
         </button>
         <button
           type="reset"
-          className="rounded-xl min-h-8 min-w-24 bg-greenIsh absolute bottom-0 right-0 mr-28"
+          className="rounded-xl min-h-8 min-w-24 bg-buttonColor absolute bottom-0 right-0 mr-28"
         >
           Cancel
         </button>

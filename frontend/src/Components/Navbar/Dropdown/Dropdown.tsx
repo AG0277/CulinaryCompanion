@@ -32,7 +32,7 @@ const DropdownMenu: React.FC<Props> = ({ config, subMenu, parent }: Props) => {
       return (
         <li
           key={item.title}
-          className={`bg-greenIsh has-submenu ${
+          className={`bg-greenIsh has-submenu text-white ${
             hasNoParent ? " rounded-t-2xl " : ""
           }${firstElementAndHasChildren ? "rounded-2xl " : ""}${
             lastIndex ? "rounded-b-2xl " : ""
@@ -49,7 +49,7 @@ const DropdownMenu: React.FC<Props> = ({ config, subMenu, parent }: Props) => {
           to={`/${item.title}${
             item.additionalQuery ? "?" + item.additionalQuery : ""
           }`}
-          className="decoration-neutral-50 "
+          className="decoration-neutral-50 text-white"
         >
           <li
             className={`bg-greenIsh has-submenu ${

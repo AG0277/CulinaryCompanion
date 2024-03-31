@@ -52,14 +52,14 @@ const EditComment = ({
         <br></br>
         <button
           type="submit"
-          className="rounded-xl min-h-8 min-w-24 bg-greenIsh absolute bottom-0 right-0"
+          className="rounded-xl min-h-8 min-w-24 bg-buttonColor absolute bottom-0 right-0"
         >
           Save
         </button>
         <button
           onClick={() => setEdit(false)}
           type="reset"
-          className="rounded-xl min-h-8 min-w-24 bg-greenIsh absolute bottom-0 right-0 mr-28"
+          className="rounded-xl min-h-8 min-w-24 bg-buttonColor absolute bottom-0 right-0 mr-28"
         >
           Cancel
         </button>

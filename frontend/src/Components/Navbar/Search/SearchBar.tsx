@@ -35,7 +35,7 @@ const SearchBar: React.FC<Props> = ({}: Props): JSX.Element => {
         className="w-1/12 h-full "
         onSubmit={onSearchSubmit}
       >
-        <div className="h-full w-full bg-orangeIsh items-center justify-center flex hover:rounded-r-lg hover:bg-orange-300">
+        <div className="h-full w-full bg-orangeIsh items-center justify-center flex hover:rounded-r-lg hover:bg-darkerButtonColor">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

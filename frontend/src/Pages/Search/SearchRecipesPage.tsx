@@ -110,7 +110,7 @@ const SearchRecipesPage = (props: Props) => {
         )}
       </div>
       <button
-        className="bg bg-greenIsh my-20 w-80 h-24 rounded-2xl"
+        className="bg bg-buttonColor my-20 w-80 h-24 rounded-2xl"
         onClick={loadMoreRecipes}
       >
         Load more recipes

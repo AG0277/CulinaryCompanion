@@ -14,7 +14,7 @@ const Navbar = memo(({}: Props) => {
       <div className=" flex justify-center">
         <div className="max-w-full h-28 flex flex-row items-center justify-between ">
           <Link to={"/"} className=" w-1/3  ">
-            <h1 className="">Culinary Companion</h1>
+            <h1 className="text-white">Culinary Companion</h1>
           </Link>
           <div className="w-2/3">
             <SearchBar />

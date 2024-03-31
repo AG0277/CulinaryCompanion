@@ -77,7 +77,7 @@ const LoginPage = (props: Props) => {
           </div>
           <button
             type="submit"
-            className="w-[220px] bg-greenIsh h-10 rounded-2xl hover:border hover:border-gray-500"
+            className="w-[220px] bg-buttonColor h-10 rounded-2xl hover:border hover:border-gray-500"
           >
             Sign in
           </button>
