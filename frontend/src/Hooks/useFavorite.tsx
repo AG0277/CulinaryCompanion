@@ -87,7 +87,6 @@ export const FavoritesProvider = ({ children }: Props) => {
       const exists = favoriteRecipesSet.find(
         (x) => x.recipeId == recipeId.toString()
       );
-      console.log(typeof favoriteRecipesSet);
 
       return !!exists;
     }

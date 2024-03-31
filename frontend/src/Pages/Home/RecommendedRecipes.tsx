@@ -16,7 +16,7 @@ const RecommendedRecipes: React.FC<Props> = (props: Props): JSX.Element => {
   return (
     <div>
       {homeRecipeData.map((category: MealCategory) => (
-        <>
+        <div key={category.title}>
           <h5 className="w-fit font-bold border-b-4 border-orangeIsh">
             {category.title}
           </h5>
@@ -24,6 +24,7 @@ const RecommendedRecipes: React.FC<Props> = (props: Props): JSX.Element => {
             <div key={category.title} className="flex justify-start">
               {category.foods.map((item) => (
                 <Card
+                  key={item.id}
                   recipeName={item.recipeName}
                   id={item.id}
                   image={item.image}
@@ -37,7 +38,7 @@ const RecommendedRecipes: React.FC<Props> = (props: Props): JSX.Element => {
               See more
             </button>
           </div>
-        </>
+        </div>
       ))}
     </div>
   );

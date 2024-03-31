@@ -16,10 +16,6 @@ const AddFavoriteComponent = ({ spoonacularId, title, image }: Props) => {
   const { isFavorite, addFavorite, removeFavorite, favoriteRecipesSet } =
     useFavorites();
 
-  useEffect(() => {
-    console.log(favoriteRecipesSet);
-  }, [favoriteRecipesSet]);
-
   const handleFavorite = async () => {
     if (isLoggedIn()) {
       if (isFavorite(spoonacularId)) {
