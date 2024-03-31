@@ -25,7 +25,7 @@ const RecipeIngredientList = ({ searchFullRecipeById }: Props) => {
     }
   });
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col mb-40">
       <div className="max-w-[556px] mx-auto ">
         <h1 className="font-bold text-4xl text-center">
           {searchFullRecipeById.title}
@@ -90,7 +90,6 @@ const RecipeIngredientList = ({ searchFullRecipeById }: Props) => {
         <div dangerouslySetInnerHTML={{ __html: htmlStringInstructions }} />
         <h1>Summary</h1>
         <div dangerouslySetInnerHTML={{ __html: htmlStringSummary }} />
-        <h1>Comments</h1>
         <Comments recipeId={searchFullRecipeById.id} />
       </div>
     </div>

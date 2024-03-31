@@ -49,6 +49,7 @@ namespace api.Repository
             return await db
                 .Comment.Include(a => a.AppUser)
                 .Where(r => r.Recipe.IdSpoonacular == id)
+                .OrderByDescending(d => d.CreatedOn)
                 .ToListAsync();
         }
 

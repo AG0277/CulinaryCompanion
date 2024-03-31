@@ -96,7 +96,7 @@ namespace api.Controllers
             return CreatedAtAction(
                 nameof(GetById),
                 new { id = comment.Id },
-                comment.FromCommentToCommentDto()
+                comment.FromCommentToGetCommentDto()
             );
         }
 
@@ -126,7 +126,7 @@ namespace api.Controllers
             var updatedComment = await commentRepository.UpdateAsync(updateCommentRequestDto, id);
             if (updatedComment == null)
                 return NotFound();
-            return Ok(updatedComment.FromCommentToCommentDto());
+            return Ok(updatedComment.FromCommentToGetCommentDto());
         }
 
         [HttpDelete]

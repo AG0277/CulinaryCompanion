@@ -20,7 +20,7 @@ const AddComments = ({ recipeId, onAddComment }: Props) => {
     }
   };
   return (
-    <div className="mb-5 relative w-fit ">
+    <div className="mb-5 relative">
       <form
         action=""
         onSubmit={(event) => {
@@ -29,8 +29,9 @@ const AddComments = ({ recipeId, onAddComment }: Props) => {
         }}
       >
         <ReactTextareaAutosize
+          id="addComment"
           ref={textarea}
-          cols={155}
+          cols={90}
           minRows={1}
           maxRows={5}
           placeholder="Add comment"
