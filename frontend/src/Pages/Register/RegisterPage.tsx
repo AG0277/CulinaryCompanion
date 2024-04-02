@@ -101,7 +101,7 @@ const RegisterPage = (props: Props) => {
             />
           </div>
           {errors.password ? (
-            <p className="text-sm text-red-400 max-w-[220px] ml-2 ">
+            <p className="text-sm text-red-600 max-w-[220px] ml-2 ">
               {errors.password.message}
             </p>
           ) : (
@@ -109,14 +109,14 @@ const RegisterPage = (props: Props) => {
           )}
           <button
             type="submit"
-            className="w-[220px] bg-buttonColor h-10 rounded-2xl hover:border hover:border-gray-500"
+            className="w-[220px] bg-greenIsh text-white h-10 rounded-2xl hover:border hover:border-gray-500"
           >
             Sign in
           </button>
         </form>
         <Link
           to="/register"
-          className="text-gray-400 block text-sm mx-auto mt-2"
+          className="text-greenIsh block text-sm mx-auto mt-2"
         >
           Don't have an account yet? Register here
         </Link>

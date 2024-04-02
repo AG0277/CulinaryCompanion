@@ -104,7 +104,7 @@ export const config = [
     ],
   },
   {
-    title: "Meat recipes",
+    title: "Meat",
     additionalQuery: "",
     subMenu: [
       {

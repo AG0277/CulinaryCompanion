@@ -44,3 +44,12 @@
   margin-top: -35px;
   display: block;
 }
+
+@media (max-width: 1440px) {
+  .dropdown-menu li {
+    width: 100px;
+  }
+  .dropdown-menu li li:hover ul {
+    margin-left: 100px;
+  }
+}

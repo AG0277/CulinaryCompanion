@@ -3,7 +3,6 @@ import { RandomRecipe } from "../../SpoonacularAPI/recipe";
 import { MealCategory, homeRecipeData } from "../../Data/RecommendedRecipes";
 import Card from "../../Components/Card/Card";
 import { useNavigate } from "react-router";
-
 type Props = {};
 
 const RecommendedRecipes: React.FC<Props> = (props: Props): JSX.Element => {
@@ -14,14 +13,14 @@ const RecommendedRecipes: React.FC<Props> = (props: Props): JSX.Element => {
     else if (category == "Beef") navigate(`/${category}`);
   };
   return (
-    <div>
+    <div className="my-0">
       {homeRecipeData.map((category: MealCategory) => (
-        <div key={category.title}>
+        <div key={category.title} className="my-20">
           <h3 className="w-fit font-bold border-b-4 border-orangeIsh mb-1">
             {category.title}
           </h3>
           <div className="flex flex-col items-center ">
-            <div key={category.title} className="flex">
+            <div key={category.title} className="flex flex-wrap">
               {category.foods.map((item) => (
                 <Card
                   key={item.id}

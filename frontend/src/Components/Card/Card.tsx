@@ -24,7 +24,7 @@ const Card: React.FC<Props> = ({
     <>
       {image && (
         <div
-          className={`${css} mr-8 rounded border-1 shadow-md  hover:cursor-pointer max-w-[312px]`}
+          className={`${css} mr-8 rounded border-1 shadow-md  hover:cursor-pointer max-w-[312px] `}
         >
           <Link to={`/recipe/${id}`}>
             <div className="" onClick={handleClick}>

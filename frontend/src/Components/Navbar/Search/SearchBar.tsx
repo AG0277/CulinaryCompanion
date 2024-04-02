@@ -21,7 +21,7 @@ const SearchBar: React.FC<Props> = ({}: Props): JSX.Element => {
   return (
     <form
       onSubmit={onSearchSubmit}
-      className="flex flex-row items-center border-orangeIsh rounded-2xl focus:outline-none border-8 bg-white w-[600px] h-[55px]"
+      className="flex flex-row items-center border-orangeIsh rounded-2xl focus:outline-none border-8 bg-white md:w-[600px] h-[55px] sm:w-10/12"
     >
       <input
         id="searchbarID"
@@ -32,7 +32,7 @@ const SearchBar: React.FC<Props> = ({}: Props): JSX.Element => {
       />
       <Link
         to={`/search/${inputRef.current?.value ? inputRef.current.value : ""}`}
-        className="w-1/12 h-full "
+        className="w-14 h-full "
         onSubmit={onSearchSubmit}
       >
         <div className="h-full w-full bg-orangeIsh items-center justify-center flex hover:rounded-r-lg hover:bg-darkerButtonColor">

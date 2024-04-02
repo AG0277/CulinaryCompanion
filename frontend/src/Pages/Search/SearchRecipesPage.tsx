@@ -90,11 +90,12 @@ const SearchRecipesPage = (props: Props) => {
             params.queryTags?.slice(1)}{" "}
         recipes
       </h1>
-      <div className="flex flex-wrap justify-center w-[1100px] ">
-        {serverError ? (
-          <h1>{serverError}</h1>
-        ) : searchResults && searchResults.results.length > 0 ? (
-          <>
+
+      {serverError ? (
+        <h1>{serverError}</h1>
+      ) : searchResults && searchResults.results.length > 0 ? (
+        <>
+          <div className="flex flex-wrap justify-center w-[1100px] ">
             {searchResults.results.map((searchResult) => (
               <Card
                 key={searchResult.id}
@@ -104,17 +105,17 @@ const SearchRecipesPage = (props: Props) => {
                 css="m-5"
               />
             ))}
-          </>
-        ) : (
-          <h1>No Results</h1>
-        )}
-      </div>
-      <button
-        className="bg bg-buttonColor my-20 w-80 h-24 rounded-2xl"
-        onClick={loadMoreRecipes}
-      >
-        Load more recipes
-      </button>
+          </div>
+          <button
+            className="bg bg-buttonColor my-20 w-80 h-24 rounded-2xl"
+            onClick={loadMoreRecipes}
+          >
+            Load more recipes
+          </button>
+        </>
+      ) : (
+        <h1>No Results</h1>
+      )}
     </div>
   );
 };

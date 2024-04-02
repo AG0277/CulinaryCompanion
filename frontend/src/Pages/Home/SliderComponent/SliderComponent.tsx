@@ -26,6 +26,7 @@ const SliderComponent = (props: Props) => {
   }, []);
 
   var settings = {
+    centerMode: true,
     dots: false,
     infinite: true,
     speed: 500,
@@ -33,31 +34,38 @@ const SliderComponent = (props: Props) => {
     slidesToShow: 4,
     arrows: false,
     accessibility: true,
+
     responsive: [
       {
-        breakpoint: 700,
+        breakpoint: 1440,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
         },
       },
       {
-        breakpoint: 400,
+        breakpoint: 1020,
         settings: {
           slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
         },
       },
     ],
   };
   return (
-    <div className="relative">
-      <div className="absolute right-0 top-1/2 z-50">
+    <div className="relative w-auto mb-20">
+      <div className="absolute right-[-50px] top-1/3 z-30">
         <div className="arrow" onClick={() => slider?.current?.slickNext()}>
           <div className="arrow-top"></div>
           <div className="arrow-bottom"></div>
         </div>
       </div>
-      <div>
-        <Slider {...settings}>
+      <div className="block">
+        <Slider ref={slider} {...settings}>
           {serverError ? (
             <h1>{serverError}</h1>
           ) : searchResults && searchResults.recipes.length > 0 ? (
@@ -74,12 +82,12 @@ const SliderComponent = (props: Props) => {
           )}
         </Slider>
       </div>
-      <div className="absolute left-0 top-1/2 z-50  ">
+      <div className="absolute left-[-75px] top-1/3 z-30  ">
         <div
           className="arrow "
           style={{
             transform: "scaleX(-1)",
-            marginTop: "-2rem",
+            marginTop: "-2.1rem",
           }}
           onClick={() => slider?.current?.slickPrev()}
         >
