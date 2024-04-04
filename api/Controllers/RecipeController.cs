@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
@@ -23,10 +24,8 @@ namespace api.Controllers
 
         [HttpPost]
         [Route("recipeId:int")]
-        public async Task<IActionResult> Create(int recipeId, string title = "", string image = "")
+        public async Task<IActionResult> Create(int recipeId, string title,  string image )
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
 
             var recipe = new Recipe
             {
@@ -34,6 +33,19 @@ namespace api.Controllers
                 Title = title,
                 Image = image
             };
+            var context = new ValidationContext(recipe, serviceProvider: null, items: null);
+            var validationResults = new List<ValidationResult>();
+
+            bool isValid = Validator.TryValidateObject(recipe, context, validationResults, true);
+            if (!isValid)
+            {
+                foreach (var validationResult in validationResults)
+                {
+                    ModelState.AddModelError(validationResult.MemberNames.FirstOrDefault() ?? string.Empty, validationResult.ErrorMessage);
+                }
+                return BadRequest(ModelState);
+            }
+
             var recipeModel = await recipeRepository.CreateAsync(recipe);
             return Ok(recipeModel);
         }
