@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { RandomRecipe } from "../../SpoonacularAPI/recipe";
 import { MealCategory, homeRecipeData } from "../../Data/RecommendedRecipes";
 import Card from "../../Components/Card/Card";
 import { useNavigate } from "react-router";
@@ -31,7 +30,7 @@ const RecommendedRecipes: React.FC<Props> = (props: Props): JSX.Element => {
               ))}
             </div>
             <button
-              className="bg bg-buttonColor my-5 w-40 h-12 rounded-2xl"
+              className="bg bg-buttonColor my-5 w-40 h-12 rounded-2xl hover:border-2 hover:border-gray-500"
               onClick={() => handleClick(category.title)}
             >
               See more

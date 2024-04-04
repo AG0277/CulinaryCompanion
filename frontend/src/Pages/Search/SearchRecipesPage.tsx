@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import { GetRandomRecipe, SearchRecipe } from "../../SpoonacularAPI/api";
+import { SearchRecipe } from "../../SpoonacularAPI/api";
 import { SearchRecipesByNeutralLanguage } from "../../SpoonacularAPI/recipe";
 import Card from "../../Components/Card/Card";
 import { useLocation, useNavigate } from "react-router";
@@ -95,7 +95,7 @@ const SearchRecipesPage = (props: Props) => {
         <h1>{serverError}</h1>
       ) : searchResults && searchResults.results.length > 0 ? (
         <>
-          <div className="flex flex-wrap justify-center w-[1100px] ">
+          <div className="flex flex-wrap justify-center xl:w-[1100px] sm:w-10/12 ">
             {searchResults.results.map((searchResult) => (
               <Card
                 key={searchResult.id}

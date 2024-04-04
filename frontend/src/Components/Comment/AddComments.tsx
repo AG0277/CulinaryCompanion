@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import ReactTextareaAutosize from "react-textarea-autosize";
-import { addCommentAPI, getCommentsAPI } from "../../Services/CommentService";
+import { addCommentAPI } from "../../Services/CommentService";
 import { CommentDb } from "../../Models/Comment";
 
 interface Props {

@@ -13,19 +13,19 @@ const RecipePage = (props: Props) => {
   useEffect(() => {
     const getRecipe = async () => {
       const result = await FindRecipeById(params.recipeId!);
-      const nutrition: Nutrients | string = await getRecipeNutrition(
-        params.recipeId!
-      );
+      // const nutrition: Nutrients | string = await getRecipeNutrition(
+      //   params.recipeId!
+      // );
       if (typeof result === "string") {
         setServerError(result);
-      } else if (typeof nutrition === "string") {
-        setServerError(nutrition);
-      } else if (
-        Array.isArray(result.extendedIngredients) &&
-        !(typeof nutrition === "string")
-      ) {
-        result.Nutrients = nutrition;
-        setRecipe(result);
+        // } else if (typeof nutrition === "string") {
+        //   setServerError(nutrition);
+        // } else if (
+        //   Array.isArray(result.extendedIngredients) &&
+        //   !(typeof nutrition === "string")
+        // ) {
+        //   result.Nutrients = nutrition;
+        //   setRecipe(result);
       } else if (Array.isArray(result.extendedIngredients)) {
         setRecipe(result);
       }

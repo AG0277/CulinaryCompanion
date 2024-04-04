@@ -1,10 +1,10 @@
-import React, { ChangeEvent, SyntheticEvent, useRef, useState } from "react";
+import React, { SyntheticEvent, useRef } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 
 interface Props {}
 
-const SearchBar: React.FC<Props> = ({}: Props): JSX.Element => {
+const SearchBar: React.FC<Props> = (props: Props): JSX.Element => {
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
@@ -26,14 +26,14 @@ const SearchBar: React.FC<Props> = ({}: Props): JSX.Element => {
       <input
         id="searchbarID"
         ref={inputRef}
-        className="p-2 pl-6  w-11/12 bg-transparent outline-none"
+        className="p-2 pl-6  w-11/12 bg-transparent outline-none text-black"
         placeholder="Find a recipe or ingredient"
         type="text"
       />
       <Link
         to={`/search/${inputRef.current?.value ? inputRef.current.value : ""}`}
         className="w-14 h-full "
-        onSubmit={onSearchSubmit}
+        onClick={onSearchSubmit}
       >
         <div className="h-full w-full bg-orangeIsh items-center justify-center flex hover:rounded-r-lg hover:bg-darkerButtonColor">
           <svg

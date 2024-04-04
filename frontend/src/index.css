@@ -4,6 +4,10 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins&family=Rubik&display=swap");
 
+@font-face {
+  font-family: "Playfair Display";
+  src: url("../public/Fonts/PlayfairDisplay/PlayfairDisplay-MediumItalic.ttf");
+}
 @layer base {
   h1 {
     @apply text-4xl;

@@ -5,18 +5,21 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { UserProvider } from "./Hooks/useAuth";
 import { FavoritesProvider } from "./Hooks/useFavorite";
-import NavbarMobile from "./Components/Navbar/Navbar/NavbarMobile";
+import Footer from "./Components/Footer/Footer";
 
 function App() {
   return (
     <>
-      <UserProvider>
-        <FavoritesProvider>
-          <Navbar />
-          <Outlet />
-          <ToastContainer />
-        </FavoritesProvider>
-      </UserProvider>
+      <div className="min-h-screen flex flex-col">
+        <UserProvider>
+          <FavoritesProvider>
+            <Navbar />
+            <Outlet />
+            <ToastContainer />
+            <Footer />
+          </FavoritesProvider>
+        </UserProvider>
+      </div>
     </>
   );
 }

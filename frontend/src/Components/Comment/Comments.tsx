@@ -1,8 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
-  addCommentAPI,
   deleteCommentAPI,
-  editCommentAPI,
   getCommentsAPI,
 } from "../../Services/CommentService";
 import { CommentDb } from "../../Models/Comment";

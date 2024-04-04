@@ -21,6 +21,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ["Poppins", "sans-serif"],
+        display: ["Playfair Display", "sans-serif"],
       },
       spacing: {
         180: "32rem",

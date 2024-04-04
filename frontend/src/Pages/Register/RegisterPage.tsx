@@ -12,9 +12,6 @@ type RegisterFormInputs = {
   email: string;
   password: string;
 };
-const passwordRegex =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
 const getCharacterValidationError = (str: string) => {
   return `Your password must have at least 1 ${str}`;
 };
