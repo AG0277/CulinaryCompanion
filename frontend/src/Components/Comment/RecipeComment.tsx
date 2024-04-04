@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import { CommentDb } from "../../Models/Comment";
 import { useAuth } from "../../Hooks/useAuth";
@@ -16,6 +16,7 @@ type Props = {
   ) => void;
   editComment: (oldCommentId: number, newComment: CommentDb) => void;
   deleteComment: (commentId: number) => void;
+  columns: number;
 };
 
 const RecipeComment = ({
@@ -24,12 +25,14 @@ const RecipeComment = ({
   handleTextAreaRef,
   editComment,
   deleteComment,
+  columns,
 }: Props) => {
   const [text, setText] = useState("");
   const [Edit, setEdit] = useState<Boolean>(false);
   const handleChange = (event: any) => {
     setText(event.target.value);
   };
+
   return (
     <div className="flex flex-col mb-10" key={item.id}>
       <div className="flex justify-start items-center">
@@ -42,7 +45,7 @@ const RecipeComment = ({
             <ReactTextareaAutosize
               id={item.id.toString()}
               defaultValue={item.content}
-              cols={90}
+              cols={columns}
               ref={(element) => handleTextAreaRef(element, item.id)}
               minRows={1}
               maxRows={5}

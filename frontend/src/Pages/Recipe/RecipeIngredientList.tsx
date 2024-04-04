@@ -19,13 +19,21 @@ const RecipeIngredientList = ({ searchFullRecipeById }: Props) => {
 
   useEffect(() => {
     if (searchFullRecipeById.extendedIngredients.length > 0) {
-      const uniqueSet = [...new Set(searchFullRecipeById.extendedIngredients)];
-      const uniqueArray = Array.from(uniqueSet);
+      const set: Set<number> = new Set<number>();
+      const uniqueArray: ExtendedIngredient[] = new Array();
+      const unqiueSet = searchFullRecipeById.extendedIngredients.map(
+        (ingredient) => {
+          if (!set.has(ingredient.id)) {
+            set.add(ingredient.id);
+            uniqueArray.push(ingredient);
+          }
+        }
+      );
       setUniqueIngredients(uniqueArray);
     }
-  });
+  }, []);
   return (
-    <div className="flex flex-col mb-40">
+    <div className="flex flex-col mb-40 mx-10 justify-center items-center">
       <div className="max-w-[556px] mx-auto ">
         <h1 className="font-bold text-4xl text-center">
           {searchFullRecipeById.title}
@@ -51,25 +59,25 @@ const RecipeIngredientList = ({ searchFullRecipeById }: Props) => {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
                 className="w-8 h-8 mr-2"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
                 />
               </svg>
               <p>Ready in {searchFullRecipeById.readyInMinutes} minutes</p>
             </div>
           </div>
-          <div className="flex justify-evenly">
+          {/* <div className="flex justify-evenly">
             <p>Kcal: {searchFullRecipeById.Nutrients.kcal}</p>
             <p>Carbs: {searchFullRecipeById.Nutrients.carbohydrates}</p>
             <p>Protein: {searchFullRecipeById.Nutrients.protein}</p>
             <p>Fat: {searchFullRecipeById.Nutrients.fat}</p>
-          </div>
+          </div> */}
         </div>
         <h1>Ingredients</h1>
         <ul className="list-disc pl-4">

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import { addCommentAPI } from "../../Services/CommentService";
 import { CommentDb } from "../../Models/Comment";
@@ -6,9 +6,10 @@ import { CommentDb } from "../../Models/Comment";
 interface Props {
   recipeId: number;
   onAddComment: (newComment: CommentDb) => void;
+  columns: number;
 }
 
-const AddComments = ({ recipeId, onAddComment }: Props) => {
+const AddComments = ({ recipeId, onAddComment, columns }: Props) => {
   const textarea = useRef<HTMLTextAreaElement>(null);
 
   const handleSubmit = async () => {
@@ -19,6 +20,9 @@ const AddComments = ({ recipeId, onAddComment }: Props) => {
       if (result) onAddComment(result);
     }
   };
+  useEffect(() => {
+    console.log(columns);
+  });
   return (
     <div className="mb-5 relative">
       <form
@@ -31,7 +35,7 @@ const AddComments = ({ recipeId, onAddComment }: Props) => {
         <ReactTextareaAutosize
           id="addComment"
           ref={textarea}
-          cols={90}
+          cols={columns}
           minRows={1}
           maxRows={5}
           placeholder="Add comment"

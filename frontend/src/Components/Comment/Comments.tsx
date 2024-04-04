@@ -17,6 +17,7 @@ const Comments = ({ recipeId }: Props) => {
   const [commentsArray, setCommentsArray] = useState<CommentDb[]>([]);
   const textarea = useRef<HTMLTextAreaElement[] | null>([]);
   const { user } = useAuth();
+  const [cols, setCols] = useState<number>(90);
 
   const isUserComment = (username: string) => {
     if (user?.username == username) return true;
@@ -65,13 +66,34 @@ const Comments = ({ recipeId }: Props) => {
         setCommentsArray(data);
       }
     };
-
     getDbComments();
   }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const maxWidth = window.innerWidth;
+      if (maxWidth < 650) {
+        const colsumns = Math.floor((maxWidth - 250) / 6.17);
+        setCols(colsumns);
+        console.log(colsumns);
+      } else {
+        setCols(65);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
-    <div className="w-min">
+    <div className=" w-fit">
       <h1>Comments</h1>
-      <AddComments recipeId={recipeId} onAddComment={addComment} />
+      <AddComments
+        recipeId={recipeId}
+        onAddComment={addComment}
+        columns={cols}
+      />
       {commentsArray.map((item) => (
         <RecipeComment
           key={item.id}
@@ -80,6 +102,7 @@ const Comments = ({ recipeId }: Props) => {
           handleTextAreaRef={handleTextAreaRef}
           editComment={editComment}
           deleteComment={deleteComment}
+          columns={cols}
         />
       ))}
     </div>
