@@ -50,7 +50,6 @@ namespace api.Tests.Controllers
         public async void RecipeController_Create_InvalidModelState(int recipeId, string title, string image)
         {
             //Arrange
-
             var recipe = new Recipe
             {
                 IdSpoonacular = recipeId,
@@ -63,6 +62,7 @@ namespace api.Tests.Controllers
 
             //Act
             var result = await controller.Create(recipeId, title, image);
+
             //Asseret
             result.Should().BeOfType<BadRequestObjectResult>();
             result.Should().NotBeNull();

@@ -24,18 +24,19 @@ namespace api.Controllers
         private readonly UserManager<AppUser> userManager;
         private readonly IRecipeRepository recipeRepository;
         private readonly ISpoonacularAPIService spoonacularAPIService;
-
+        private readonly IClaimsExtensions claimsExtensions;
         public CommentController(
             ICommentRepository CommentRepository,
             UserManager<AppUser> UserManager,
             IRecipeRepository RecipeRepository,
-            ISpoonacularAPIService SpoonacularAPIService
+            ISpoonacularAPIService SpoonacularAPIService, IClaimsExtensions ClaimsExtensions
         )
         {
             commentRepository = CommentRepository;
             userManager = UserManager;
             recipeRepository = RecipeRepository;
             spoonacularAPIService = SpoonacularAPIService;
+            claimsExtensions = ClaimsExtensions;
         }
 
         [HttpGet("{id}")]
@@ -89,7 +90,7 @@ namespace api.Controllers
                     return NotFound();
             }
             comment.RecipeId = recipeId.Id;
-            var username = User.GetUsername();
+            var username = await claimsExtensions.GetUsername(User);
             var user = await userManager.FindByNameAsync(username);
             comment.AppUserId = user.Id;
             await commentRepository.CreateAsync(comment);
@@ -113,7 +114,7 @@ namespace api.Controllers
             var comment = await commentRepository.GetByIdAsync(id);
             if (comment == null)
                 return NotFound();
-            var username = User.GetUsername();
+            var username = await claimsExtensions.GetUsername(User);
             var user = await userManager.FindByNameAsync(username);
 
             var admin = await userManager.IsInRoleAsync(user, "admin");
@@ -137,7 +138,7 @@ namespace api.Controllers
             var commentToDelete = await commentRepository.GetByIdAsync(id);
             if (commentToDelete == null)
                 return NotFound();
-            var username = User.GetUsername();
+            var username = await claimsExtensions.GetUsername(User);
             var user = await userManager.FindByNameAsync(username);
             var admin = await userManager.IsInRoleAsync(user, "admin");
             if (!admin)

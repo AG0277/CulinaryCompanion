@@ -1,4 +1,5 @@
 using api.Data;
+using api.Extensions;
 using api.Interfaces;
 using api.Models;
 using api.Repository;
@@ -104,6 +105,7 @@ builder.Services.AddHttpClient<ISpoonacularAPIService, SpoonacularAPIService>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
 builder.Services.AddScoped<IFavoriteRepository, FavoriteRepository>();
+builder.Services.AddScoped<IClaimsExtensions, ClaimsExtensions>();
 builder.Services.AddControllers(options => options.SuppressAsyncSuffixInActionNames = false);
 
 var app = builder.Build();
@@ -122,3 +124,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+public partial class Program { }

@@ -13,7 +13,7 @@ namespace api.Mappers
         {
             return new FavoriteDto
             {
-                RecipeId = favorite.Recipe.IdSpoonacular,
+                spoonacularRecipeId = favorite.Recipe.IdSpoonacular,
                 Image = favorite.Recipe.Image,
                 Title = favorite.Recipe.Title
             };

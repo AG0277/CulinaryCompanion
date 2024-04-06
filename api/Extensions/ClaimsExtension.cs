@@ -1,3 +1,4 @@
+using api.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,15 +7,13 @@ using System.Threading.Tasks;
 
 namespace api.Extensions
 {
-    public static class ClaimsExtensions
+    public class ClaimsExtensions : IClaimsExtensions
     {
-        public static string GetUsername(this ClaimsPrincipal user)
+        public virtual Task<string> GetUsername(ClaimsPrincipal user)
         {
-            return user
-                .Claims.SingleOrDefault(x =>
-                    x.Type.Equals("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname")
-                )
-                .Value;
+            return Task.FromResult(user?.Claims.SingleOrDefault(x =>
+                x.Type.Equals("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname")
+            )?.Value);
         }
     }
 }

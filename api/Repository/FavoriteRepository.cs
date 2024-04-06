@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using api.Data;
 using api.Interfaces;
 using api.Models;
+using Microsoft.AspNetCore.JsonPatch.Internal;
 using Microsoft.EntityFrameworkCore;
 
 namespace api.Repository
@@ -46,6 +47,7 @@ namespace api.Repository
             return await db
                 .Favorite.Include(a => a.Recipe)
                 .FirstOrDefaultAsync(x => x.Recipe.IdSpoonacular == recipeid);
+
         }
     }
 }
