@@ -215,7 +215,6 @@ namespace api.Tests.Controllers
             Assert.Equal(fakeRecipe.IdSpoonacular, resultObject.spoonacularRecipeId);
         }
 
-
         [Fact]
         public async void FavoriteController_Create_NotFound()
         {
@@ -252,7 +251,6 @@ namespace api.Tests.Controllers
 
             result.Should().BeOfType<NotFoundResult>();
         }
-
 
         [Fact]
         public async void FavoriteController_Delete_FavoriteDto()
