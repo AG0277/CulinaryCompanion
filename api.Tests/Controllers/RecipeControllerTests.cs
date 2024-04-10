@@ -1,4 +1,6 @@
 ﻿using api.Controllers;
+using api.Data;
+using api.Dtos.Recipe;
 using api.Interfaces;
 using api.Models;
 using FakeItEasy;
@@ -8,64 +10,42 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace api.Tests.Controllers
 {
-    public class RecipeControllerTests
+    public class RecipeControllerTests : IClassFixture<ApplicationTestsFactory>
     {
-        private readonly IRecipeRepository recipeRepository;
-        public RecipeControllerTests()
+        private readonly ApplicationTestsFactory factory;
+        private readonly HttpClient Client;
+        private readonly ApplicationDbContext db;
+
+        public RecipeControllerTests(ApplicationTestsFactory Factory)
         {
-            recipeRepository = A.Fake<IRecipeRepository>();
-        }
-
-        [Theory]
-        [InlineData(0, "string","string.jpg")]
-        [InlineData(101.2, "pizza", "pizza.png")]
-        public async void RecipeController_Create_RecipeModel(int recipeId, string title , string image )
-        {
-            //Arrange
-
-            var recipefake = A.Fake<Recipe>();
-            A.CallTo(() => recipeRepository.CreateAsync(recipefake)).Returns(recipefake);
-            var controller = new RecipeController(recipeRepository);
-
-
-            //Act
-            var result = await controller.Create(recipeId, title, image);
-            //Asseret
-            result.Should().NotBeNull();
-            result.Should().BeOfType<OkObjectResult>();
-            var okResult = result as OkObjectResult;
-            okResult.Should().NotBeNull();
-            okResult.Value.Should().BeEquivalentTo(recipefake);
+            factory = Factory;
+            Client = factory.GetClient();
+            db = factory.GetDbContext();
 
         }
 
-        [Theory]
-        [InlineData(-1, "bolognese", "bolognese.png")]
-
-        public async void RecipeController_Create_InvalidModelState(int recipeId, string title, string image)
+        [Fact]
+        public async void RecipeController_GetAll_NotFound()
         {
             //Arrange
-            var recipe = new Recipe
+            var recipe = new CreateRecipeDto
             {
-                IdSpoonacular = recipeId,
-                Title = title,
-                Image = image
+                spoonacularRecipeId = 1
+                ,
+                Image = "asdsa",
+                Title = "aqq",
             };
-            A.CallTo(() => recipeRepository.CreateAsync(recipe)).Returns(recipe);
-            var controller = new RecipeController(recipeRepository);
-
-
             //Act
-            var result = await controller.Create(recipeId, title, image);
-
-            //Asseret
-            result.Should().BeOfType<BadRequestObjectResult>();
-            result.Should().NotBeNull();
+            var result = await Client.PostAsJsonAsync("api/recipe",recipe);
+            //Assert
+            result.StatusCode.Should().Be(HttpStatusCode.OK);
 
         }
     }

@@ -4,8 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
+using api.Dtos.Recipe;
 using api.Interfaces;
 using api.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,16 +24,29 @@ namespace api.Controllers
             recipeRepository = RecipeRepository;
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var recipe = new Recipe
+            {
+                Image = "asdas",
+                Title = "asdas",
+                IdSpoonacular = 2,
+                Id = 1
+        };
+            return Ok(recipe);
+        }
         [HttpPost]
-        [Route("recipeId:int")]
-        public async Task<IActionResult> Create(int recipeId, string title,  string image )
+        [Authorize]
+        public async Task<IActionResult> Create([FromBody] CreateRecipeDto recipeDto )
         {
 
             var recipe = new Recipe
             {
-                IdSpoonacular = recipeId,
-                Title = title,
-                Image = image
+                IdSpoonacular =recipeDto.spoonacularRecipeId,
+                Title = recipeDto.Title,
+                Image = recipeDto.Image
             };
             var context = new ValidationContext(recipe, serviceProvider: null, items: null);
             var validationResults = new List<ValidationResult>();
@@ -47,7 +62,7 @@ namespace api.Controllers
             }
 
             var recipeModel = await recipeRepository.CreateAsync(recipe);
-            return Ok(recipeModel);
+            return Ok(recipe);
         }
     }
 }

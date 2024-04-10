@@ -17,10 +17,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//{
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+//});
 
 builder.Services.AddSwaggerGen(option =>
 {
@@ -100,7 +100,6 @@ builder
     });
 
 builder.Services.AddScoped<ITokenService, TokenService>();
-builder.Services.AddScoped<HttpClient>();
 builder.Services.AddHttpClient<ISpoonacularAPIService, SpoonacularAPIService>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
