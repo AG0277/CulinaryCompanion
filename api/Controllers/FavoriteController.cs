@@ -9,6 +9,7 @@ using api.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace api.Controllers
 {
@@ -43,7 +44,7 @@ namespace api.Controllers
             var username = await claimsExtensions.GetUsername(User);
             var user = await userManager.FindByNameAsync(username);
             var favorite = await favoriteRepository.GetAllAsync(user);
-            if (favorite == null)
+            if (favorite.IsNullOrEmpty())
                 return NotFound();
             var favoriteDto = favorite.Select(FavoriteMappers.FromFavoriteToFavoriteDto);
             return Ok(favoriteDto);
@@ -68,13 +69,19 @@ namespace api.Controllers
             var user = await userManager.FindByNameAsync(username);
 
             var favorite = new Favorite { AppUserId = user.Id, RecipeId = recipe.Id };
-            var fav = await favoriteRepository.CreateAsync(favorite);
-
-            return CreatedAtAction(
-                nameof(GetById),
-                new { spoonacularrecipeid = fav.Recipe.IdSpoonacular },
-                fav.FromFavoriteToFavoriteDto()
-            );
+            try
+            {
+                var fav = await favoriteRepository.CreateAsync(favorite);
+                return CreatedAtAction(
+                    nameof(GetById),
+                    new { spoonacularrecipeid = fav.Recipe.IdSpoonacular },
+                    fav.FromFavoriteToFavoriteDto()
+                );
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500 ,e.Message);
+            }
         }
 
         [HttpDelete("{spoonacularrecipeid}")]
@@ -85,12 +92,6 @@ namespace api.Controllers
             var favorite = await favoriteRepository.GetByIdAsync(spoonacularrecipeid);
             if (favorite == null)
                 return NotFound();
-            var username = await claimsExtensions.GetUsername(User);
-            var user = await userManager.FindByNameAsync(username);
-
-
-            if (favorite.AppUser.Id != user.Id)
-                return Unauthorized();
 
             var favoriteDelete =  await favoriteRepository.DeleteAsync(favorite);
             return Ok(favoriteDelete.FromFavoriteToFavoriteDto());

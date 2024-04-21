@@ -25,18 +25,7 @@ namespace api.Controllers
         }
 
 
-        [HttpGet]
-        public async Task<IActionResult> Get()
-        {
-            var recipe = new Recipe
-            {
-                Image = "asdas",
-                Title = "asdas",
-                IdSpoonacular = 2,
-                Id = 1
-        };
-            return Ok(recipe);
-        }
+
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Create([FromBody] CreateRecipeDto recipeDto )

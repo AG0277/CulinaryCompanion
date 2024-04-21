@@ -5,6 +5,7 @@ import RecommendedRecipes from "./RecommendedRecipes";
 import BackGroundImage from "../../Images/HomepageBackground1.webp";
 import ChefCooking from "../../Images/chefCooking.webp";
 import { useRef } from "react";
+import SliderComponent from "./SliderComponent/SliderComponent";
 
 type Props = {};
 
@@ -54,7 +55,7 @@ const HomePage = (props: Props) => {
             <h3 className="w-fit font-bold border-b-4 border-orangeIsh mt-20 mb-1">
               Discover our latest creations
             </h3>
-            {/* <SliderComponent /> */}
+            <SliderComponent />
             <RecommendedRecipes />
 
             <div className="flex flex-wrap justify-evenly ">

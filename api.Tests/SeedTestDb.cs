@@ -27,18 +27,6 @@ namespace api.Tests
             await SeedCommentsAsync();
         }
 
-        private async Task SeedUser()
-        {
-
-            var user = new AppUser
-            {
-                Email = "test123@gmail.com",
-                UserName = "testUsername",
-                PasswordHash = "hashed_password"
-            };
-            db.Users.Add(user);
-            db.SaveChanges();
-        }
         private async Task SeedRecipesAsync()
         {
 
@@ -59,7 +47,7 @@ namespace api.Tests
 
         private async Task SeedFavoritesAsync()
         {
-            var user = await db.Users.FirstOrDefaultAsync(u => u.UserName == "testUsername");
+            var user = await db.Users.FirstOrDefaultAsync(u => u.UserName == "testUsername1");
             var allRecipes = await db.Recipe.ToListAsync();
             var Favorites = new List<Favorite> {   new Favorite
             {
@@ -81,6 +69,7 @@ namespace api.Tests
                 Recipe = allRecipes[2],
                 RecipeId = allRecipes[2].Id
             }};
+        
 
              db.Favorite.AddRange(Favorites);
             await db.SaveChangesAsync();
@@ -89,7 +78,7 @@ namespace api.Tests
 
         private async Task SeedCommentsAsync()
         {
-            var user = await db.Users.FirstOrDefaultAsync(u => u.UserName == "testUsername");
+            var user = await db.Users.FirstOrDefaultAsync(u => u.UserName == "testUsername1");
             var allRecipes = await db.Recipe.ToListAsync();
             var Comments = new List<Comment> {   new Comment
             {

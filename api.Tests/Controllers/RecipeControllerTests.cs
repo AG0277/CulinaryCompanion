@@ -3,6 +3,7 @@ using api.Data;
 using api.Dtos.Recipe;
 using api.Interfaces;
 using api.Models;
+using Azure;
 using FakeItEasy;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -44,8 +45,13 @@ namespace api.Tests.Controllers
             };
             //Act
             var result = await Client.PostAsJsonAsync("api/recipe",recipe);
+            var createdRecipe = await result.Content.ReadFromJsonAsync<Recipe>();
             //Assert
             result.StatusCode.Should().Be(HttpStatusCode.OK);
+            createdRecipe.IdSpoonacular.Should().Be(recipe.spoonacularRecipeId);
+            createdRecipe.Title.Should().Be(recipe.Title);
+            createdRecipe.Image.Should().Be(recipe.Image);
+
 
         }
     }

@@ -30,8 +30,10 @@ const SliderComponent = (props: Props) => {
     dots: false,
     infinite: true,
     speed: 500,
+    autoplay: true,
     slidesToScroll: 1,
     slidesToShow: 4,
+    autoplaySpeed: 2000,
     arrows: false,
     accessibility: true,
 
@@ -59,7 +61,10 @@ const SliderComponent = (props: Props) => {
   return (
     <div className="relative w-auto mb-20">
       <div className="absolute right-[-50px] top-1/3 z-30">
-        <div className="arrow" onClick={() => slider?.current?.slickNext()}>
+        <div
+          className="sliderarrow"
+          onClick={() => slider?.current?.slickNext()}
+        >
           <div className="arrow-top"></div>
           <div className="arrow-bottom"></div>
         </div>
@@ -84,7 +89,7 @@ const SliderComponent = (props: Props) => {
       </div>
       <div className="absolute left-[-75px] top-1/3 z-30  ">
         <div
-          className="arrow "
+          className="sliderarrow "
           style={{
             transform: "scaleX(-1)",
             marginTop: "-2.1rem",
