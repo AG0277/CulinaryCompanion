@@ -13,6 +13,7 @@ using Azure.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace api.Controllers
 {
@@ -42,8 +43,6 @@ namespace api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
 
             var comment = await commentRepository.GetByIdAsync(id);
             if (comment == null)
@@ -55,10 +54,8 @@ namespace api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetBySpoonacularId([FromQuery] int recipeid)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
             var commentList = await commentRepository.GetBySpoonacularIdAsync(recipeid);
-            if (commentList == null)
+            if (commentList.IsNullOrEmpty())
                 return NotFound();
             var getCommentDto = commentList.Select(s => s.FromCommentToGetCommentDto());
 
@@ -149,8 +146,6 @@ namespace api.Controllers
 
             var comment = await commentRepository.DeleteAsync(id);
             var commentDto = comment.FromCommentToCommentDto();
-            if (commentDto == null)
-                return NotFound();
             return Ok(commentDto);
         }
     }

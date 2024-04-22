@@ -79,6 +79,7 @@ namespace api.Tests
         private async Task SeedCommentsAsync()
         {
             var user = await db.Users.FirstOrDefaultAsync(u => u.UserName == "testUsername1");
+            var user2 = await db.Users.FirstOrDefaultAsync(u => u.UserName == "testUsername2");
             var allRecipes = await db.Recipe.ToListAsync();
             var Comments = new List<Comment> {   new Comment
             {
@@ -99,6 +100,38 @@ namespace api.Tests
                 Content = "amazing recipe!",
                 AppUser = user,
                 AppUserId = user.Id,
+                Recipe = allRecipes[4],
+                RecipeId = allRecipes[4].Id
+            },
+            new Comment
+            {
+                Content = "amazing recipe1!",
+                AppUser = user,
+                AppUserId = user.Id,
+                Recipe = allRecipes[4],
+                RecipeId = allRecipes[4].Id
+            },
+            new Comment
+            {
+                Content = "amazing recipe2!",
+                AppUser = user,
+                AppUserId = user.Id,
+                Recipe = allRecipes[4],
+                RecipeId = allRecipes[4].Id
+            },
+            new Comment
+            {
+                Content = "amazing recipe3!",
+                AppUser = user,
+                AppUserId = user.Id,
+                Recipe = allRecipes[4],
+                RecipeId = allRecipes[4].Id
+            },
+                        new Comment
+            {
+                Content = "amazing recipe! from user2",
+                AppUser = user2,
+                AppUserId = user2.Id,
                 Recipe = allRecipes[4],
                 RecipeId = allRecipes[4].Id
             },};

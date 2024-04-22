@@ -11,6 +11,6 @@ namespace api.Dtos.Comment
         public string Content { get; set; } = string.Empty;
         public string CreatedOn { get; set; } = DateTime.Now.ToString("yyyy-MM-dd");
         public string CreatedBy { get; set; } = string.Empty;
-        public int? RecipeId { get; set; }
+        public int RecipeId { get; set; }
     }
 }
