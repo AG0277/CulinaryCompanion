@@ -83,7 +83,7 @@ namespace api.Controllers
                 recipeId = await spoonacularAPIService.GetRecipeBySpoonacularId(
                     spoonacularRecipeId
                 );
-                if (spoonacularAPIService == null)
+                if (recipeId == null)
                     return NotFound();
             }
             comment.RecipeId = recipeId.Id;
@@ -111,15 +111,6 @@ namespace api.Controllers
             var comment = await commentRepository.GetByIdAsync(id);
             if (comment == null)
                 return NotFound();
-            var username = await claimsExtensions.GetUsername(User);
-            var user = await userManager.FindByNameAsync(username);
-
-            var admin = await userManager.IsInRoleAsync(user, "admin");
-            if (!admin)
-            {
-                if (comment.AppUser.Id != user.Id)
-                    return Unauthorized();
-            }
 
             var updatedComment = await commentRepository.UpdateAsync(updateCommentRequestDto, id);
             if (updatedComment == null)
