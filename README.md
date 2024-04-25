@@ -39,5 +39,28 @@ In the frontend folder
 ```bash
 npm start
 ```
+# <h1>Wesbite gallery</h1>
+
+HomePage1 :</br>
+![HomePage1](readmeIMG/homepage.PNG)
+</br>
+</br>
+
+HomePage1 :</br>
+![HomePage2](readmeIMG/homepage2.PNG)
+</br>
+</br>
+
+Query example :</br>
+![queryExample](readmeIMG/queryExample.PNG)
+</br>
+</br>
+
+Recipe page :</br>
+![recipepage](readmeIMG/recipePage.PNG)
+</br>
+</br>
+</br>
+</br>
 
 
